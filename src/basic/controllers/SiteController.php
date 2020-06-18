@@ -125,4 +125,13 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+     /**
+     * Displays especialidad page.
+     *
+     * @return string
+     */
+    public function actionEspecialidad()
+    {
+        return $this->render('especialidad');
+    }
 }

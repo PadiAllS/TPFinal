@@ -1,2 +1,5 @@
-
-/mysqldata/
+.DS_Store
+mysqldata/*
+src/composer/*
+.vscod
+docker-compose.yml
