@@ -12,7 +12,7 @@ services:
         - ./mysqldata:/var/lib/mysql:delegated
 
    app:
-      image: yiisoftware/yii2-php:7.1-apache
+      image: yiisoftware/yii2-php:7.3-apache
       volumes: 
         - ./src/composer/cache:/root/.composer/cahe:delegated
         - ./src/basic:/app:delegated
