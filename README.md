@@ -52,26 +52,25 @@ at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
 
 ### Install from an Script of this Project:
 
-Execute for console this file ~~~start-project.sh~~~ in folder bin. 
-```
+Execute for console this file **start-project.sh** in folder bin. 
+
 
 ### Install with Docker and permissions in your System
 
-Run the script in console ~~~first-start.sh~~~ in carpeta bin.
+Run the script in console **first-start.sh** in carpeta bin.
 
 Update your vendor packages
 
-    docker-compose run --rm php composer update --prefer-dist
+   $ docker-compose run --rm php composer update --prefer-dist
     
 Run the installation triggers (creating cookie validation code)
 
-    docker-compose run --rm php composer install    
+  $  docker-compose run --rm php composer install    
     
     
-
 CONFIGURATION
 -------------
-Rename file ~~~docker-compose.dist.yml~~~ to ~~~docker-compose.yml~~~
+Rename file **docker-compose.dist.yml** to **docker-compose.yml**
 
 ### Database
 
@@ -88,7 +87,7 @@ Edit the file `docker-compose.yml` with real data, for example:
 
 Edit the file `docker-compose.yml` with real data, for example:
 
-```ports:
+```   ports:
         - 8000:80
       environment:
         DB_DATABASE: dbname
@@ -106,14 +105,13 @@ Edit the file `docker-compose.yml` with real data, for example:
 ```     
 Start the container
 
-    docker-compose up -d
+  $  docker-compose up -d
     
 ### (Optional) Create  database and update it by applying migrations if you have them.
 
  Run from a script of this project to facilitate:
 
-Execute for console this file ~~~yii.sh~~~ in folder bin. 
-```
+Execute for console this file **yii.sh** in folder bin. 
    ```
-  yii migrate/create <name>
+ $ yii migrate/create <name>
    ```
