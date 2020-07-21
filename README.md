@@ -60,13 +60,13 @@ Execute for console this file **start-project.sh** in folder bin.
 Run the script in console **first-start.sh** in carpeta bin.
 
 Update your vendor packages
-
+ ```
    $ docker-compose run --rm php composer update --prefer-dist
-    
+ ```   
 Run the installation triggers (creating cookie validation code)
-
+ ```
   $  docker-compose run --rm php composer install    
-    
+  ```   
     
 CONFIGURATION
 -------------
@@ -104,9 +104,9 @@ Edit the file `docker-compose.yml` with real data, for example:
          - 8001:80
 ```     
 Start the container
-
+ ```
   $  docker-compose up -d
-    
+ ```   
 ### (Optional) Create  database and update it by applying migrations if you have them.
 
  Run from a script of this project to facilitate:
