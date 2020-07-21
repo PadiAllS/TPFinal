@@ -1,0 +1,4 @@
+0000000000000000000000000000000000000000 15f40513adf69dcd3ec129e1adde53eda4c0351f root <padialls@hotmail.com> 1592079633 -0300	commit (initial): primer commit2
+15f40513adf69dcd3ec129e1adde53eda4c0351f e5f45e18d0e4eff7f7721dfe4e42d396ca8ad3f6 root <padialls@hotmail.com> 1592495127 -0300	commit: implementacion api especialidad desde vue
+e5f45e18d0e4eff7f7721dfe4e42d396ca8ad3f6 c63c185fa0b219b52b742bd0038e009580fe3357 root <padialls@hotmail.com> 1592504537 -0300	pull: Fast-forward
+c63c185fa0b219b52b742bd0038e009580fe3357 8b0b2453ba68f5443fcf287f0b2c7631f83dd4f9 root <padialls@hotmail.com> 1594976857 -0300	commit: first commit/ bases de datos y crud especialidades-horaatencion-patologias-medicos
