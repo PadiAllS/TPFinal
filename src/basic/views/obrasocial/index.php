@@ -15,11 +15,22 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
 ?>
 
 <div id="app" class="container">
-    <template>
-        <h1>{{msg}}
-            <b-icon icon="pencil-square"></b-icon>
-        </h1>
-    </template>
+    <div>
+        <b-jumbotron bg-variant="info" text-variant="white" border-variant="dark">
+            <b-container fluid='' class="text-center">
+                <b-row>
+                    <b-col>
+                        <template>
+                            <h1>{{msg}}
+                                <b-icon icon="pencil-square"></b-icon>
+                            </h1>
+                        </template>
+                    </b-col>
+                </b-row>
+        </b-jumbotron>
+    </div>
+
+
     <b-modal v-model="showModal" id="my-modal">
         <form action="">
             <div class="form-group">
@@ -70,7 +81,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
 
 
     <p>
-        <button @click="showModal=true" type="button" class="btn btn-primary">Nuevo</button>
+        <b-button @click="showModal=true" block variant="primary">Nueva Obra-Social</button>
     </p>
 
     <table class="table">
@@ -167,7 +178,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
             },
             getObrasocial: function() {
                 var self = this;
-                axios.get('/apiv1/obrasocial?page=' + self.currentPage, {
+                axios.get('/apiv1/obrasocials?page=' + self.currentPage, {
                         params: self.filter
                     })
                     .then(function(response) {

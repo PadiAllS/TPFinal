@@ -16,81 +16,100 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
 ?>
 
 <div id="app" class="container">
-    <template>
-        <h1>{{msg}}
-            <b-icon icon="card-checklist"></b-icon>
-        </h1>
-    </template>
-    <!-- Button trigger modal -->
-    <b-modal v-model="showModal" id="my-modal">
-        <form action="">
-            <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input v-model="especialidad.nombre" type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingrese especialidad" aria-describedby="helpId">
-                <small id="titlehelpId" class="text-muted"></small>
-                <span class="text-danger" v-if="errors.nombre"> {{ errors.nombre }} </span>
-            </div>
-            <div class="form-group">
-                <label for="detalle">Detalle</label>
-                <input v-model="especialidad.detalle" type="text" name="detalle" id="detalle" class="form-control" placeholder="Ingrese descripcion" aria-describedby="helpId">
-                <small id="bodyhelpId" class="text-muted"></small>
-                <span class="text-danger" v-if="errors.detalle">{{ errors.detalle }}</span>
-            </div>
+    <b-container fluid='' class="text-center">
+        <b-row>
+            <b-col>
+                <template>
+                    <h1>{{msg}}
+                        <b-icon icon="card-checklist"></b-icon>
+                    </h1>
+                </template>
+            </b-col>
+        </b-row>
 
-        </form>
-        <template v-slot:modal-footer="{ok, cancel, hide}">
-            <button v-if="isNewRecord" @click="addEspecialidad()" type="button" class="btn btn-primary m-3">Crear</button>
-            <!-- <button v-if="!isNewRecord" @click="isNewRecord = !isNewRecord" v-on:click="especialidad={}" type="button" class="btn btn-success m-3">Nuevo</button> -->
-            <button v-if="!isNewRecord" @click="updateEspecialidad(especialidad.id_especialidad)" type="button" class="btn btn-primary m-3">Actualizar</button>
+        <!-- Button trigger modal -->
+        <b-modal v-model="showModal" id="my-modal">
+            <form action="">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input v-model="especialidad.nombre" type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingrese especialidad" aria-describedby="helpId">
+                    <small id="titlehelpId" class="text-muted"></small>
+                    <span class="text-danger" v-if="errors.nombre"> {{ errors.nombre }} </span>
+                </div>
+                <div class="form-group">
+                    <label for="detalle">Detalle</label>
+                    <input v-model="especialidad.detalle" type="text" name="detalle" id="detalle" class="form-control" placeholder="Ingrese descripcion" aria-describedby="helpId">
+                    <small id="bodyhelpId" class="text-muted"></small>
+                    <span class="text-danger" v-if="errors.detalle">{{ errors.detalle }}</span>
+                </div>
 
-        </template>
-    </b-modal>
+            </form>
+            <template v-slot:modal-footer="{ok, cancel, hide}">
+                <button v-if="isNewRecord" @click="addEspecialidad()" type="button" class="btn btn-primary m-3">Crear</button>
+                <!-- <button v-if="!isNewRecord" @click="isNewRecord = !isNewRecord" v-on:click="especialidad={}" type="button" class="btn btn-success m-3">Nuevo</button> -->
+                <button v-if="!isNewRecord" @click="updateEspecialidad(especialidad.id_especialidad)" type="button" class="btn btn-primary m-3">Actualizar</button>
+
+            </template>
+        </b-modal>
+        <!-- Termina el modal -->
+        <p>
+            <template>
+                <div>
+                    <b-container>
+                        <b-row class="justify-content-md-end">
+                            <button @click="showModal=true" type='button' class="btn btn-primary">Nuevo</button>
+                            <b-button :class="visible ? null : 'collapsed'" :aria-expanded="visible ? 'true' : 'false'" aria-controls="collapse-4" @click="visible = !visible">
+                                Ocultar Lista </b-button>
+                        </b-row>
+                    </b-container>
+                    <b-collapse id="collapse-4" v-model="visible" class="mt-2">
+                        <table class=" table">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Detalle</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input v-on:change="getEspecialidades()" class="form-control" v-model="filter.id_especialidad">
+                                    </td>
+                                    <td>
+                                        <input v-on:change="getEspecialidades()" class="form-control" v-model="filter.nombre">
+                                    </td>
+                                    <td>
+                                        <input v-on:change="getEspecialidades()" class="form-control" v-model="filter.detalle">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr v-for="(espec,key) in especialidades" v-bind:key="espec.id_especialidad">
+                                    <td scope="row">{{espec.id_especialidad}}</td>
+                                    <td>{{espec.nombre}}</td>
+                                    <td>{{espec.detalle}}</td>
+
+                                    <td>
+                                        <button @click="showModal=true" v-on:click="editEspecialidad(key)" type="button" class="btn btn-warning">Editar</button>
+                                    </td>
+                                    <td>
+                                        <button v-on:click="deleteEspecialidad(espec.id_especialidad)" type="button" class="btn btn-danger">Borrar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <b-pagination v-model="currentPage" :total-rows="pagination.total" :per-page="pagination.perPage" aria-controls="my-table"></b-pagination>
+
+                    </b-collapse>
+                </div>
+            </template>
+        </p>
 
 
-    <p>
-        <button @click="showModal=true" type="button" class="btn btn-primary">Nuevo</button>
-    </p>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Detalle</th>
-                <th></th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>
-                    <input v-on:change="getEspecialidades()" class="form-control" v-model="filter.id_especialidad">
-                </td>
-                <td>
-                    <input v-on:change="getEspecialidades()" class="form-control" v-model="filter.nombre">
-                </td>
-                <td>
-                    <input v-on:change="getEspecialidades()" class="form-control" v-model="filter.detalle">
-                </td>
-                <td></td>
-                <td></td>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr v-for="(espec,key) in especialidades" v-bind:key="espec.id_especialidad">
-                <td scope="row">{{espec.id_especialidad}}</td>
-                <td>{{espec.nombre}}</td>
-                <td>{{espec.detalle}}</td>
-
-                <td>
-                    <button @click="showModal=true" v-on:click="editEspecialidad(key)" type="button" class="btn btn-warning">Editar</button>
-                </td>
-                <td>
-                    <button v-on:click="deleteEspecialidad(espec.id_especialidad)" type="button" class="btn btn-danger">Borrar</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <b-pagination v-model="currentPage" :total-rows="pagination.total" :per-page="pagination.perPage" aria-controls="my-table"></b-pagination>
 
 </div>
 
@@ -108,6 +127,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                 isNewRecord: true,
                 currentPage: 1,
                 pagination: {},
+                visible: true,
                 showModal: false,
             }
         },
@@ -183,10 +203,6 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                         })
                     }
                 }, );
-
-
-
-                // if (this.showConfirmButton = true) {
             },
 
             editEspecialidad: function(key) {
@@ -214,6 +230,12 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                     .then(function() {
                         // always executed
                     });
+                Swal.fire({
+                    title: 'Se creo el registro correctamente',
+                    icon: 'success',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Aceptar',
+                })
             },
             updateEspecialidad: function(key) {
                 var self = this;

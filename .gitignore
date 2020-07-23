@@ -3,3 +3,4 @@ mysqldata/*
 src/composer/*
 .vscod
 docker-compose.yml
+/nbproject/private/
