@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Medicoatencion */
+/* @var $model app\models\Obrasocial */
 
-$this->title = 'Create Medicoatencion';
-$this->params['breadcrumbs'][] = ['label' => 'Medicoatencions', 'url' => ['index']];
+$this->title = 'Create Obrasocial';
+$this->params['breadcrumbs'][] = ['label' => 'Obrasocials', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="medicoatencion-create">
+<div class="obrasocial-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Medico;
+use app\models\Obrasocial;
 
 /**
- * MedicoSearch represents the model behind the search form of `app\models\Medico`.
+ * ObrasocialSearch represents the model behind the search form of `app\models\Obrasocial`.
  */
-class MedicoSearch extends Medico
+class ObrasocialSearch extends Obrasocial
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class MedicoSearch extends Medico
     public function rules()
     {
         return [
-            [['id_medico', 'telefono', 'celular', 'especialidad_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['nombre', 'apellido', 'direccion', 'localidad', 'codpos', 'fecha_nacimiento', 'sexo', 'tipo_doc', 'nro_doc', 'mail', 'matricula'], 'safe'],
+            [['id_obra_social', 'telefono', 'celular', 'reintegro', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
+            [['nombre', 'direccion', 'contacto'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class MedicoSearch extends Medico
      */
     public function search($params)
     {
-        $query = Medico::find();
+        $query = Obrasocial::find();
 
         // add conditions that should always apply here
 
@@ -48,7 +48,7 @@ class MedicoSearch extends Medico
             'query' => $query,
         ]);
 
-        $this->load($params,'');
+        $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -58,11 +58,10 @@ class MedicoSearch extends Medico
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id_medico' => $this->id_medico,
+            'id_obra_social' => $this->id_obra_social,
             'telefono' => $this->telefono,
             'celular' => $this->celular,
-            'fecha_nacimiento' => $this->fecha_nacimiento,
-            'especialidad_id' => $this->especialidad_id,
+            'reintegro' => $this->reintegro,
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
             'updated_by' => $this->updated_by,
@@ -70,15 +69,8 @@ class MedicoSearch extends Medico
         ]);
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'apellido', $this->apellido])
             ->andFilterWhere(['like', 'direccion', $this->direccion])
-            ->andFilterWhere(['like', 'localidad', $this->localidad])
-            ->andFilterWhere(['like', 'codpos', $this->codpos])
-            ->andFilterWhere(['like', 'sexo', $this->sexo])
-            ->andFilterWhere(['like', 'tipo_doc', $this->tipo_doc])
-            ->andFilterWhere(['like', 'nro_doc', $this->nro_doc])
-            ->andFilterWhere(['like', 'mail', $this->mail])
-            ->andFilterWhere(['like', 'matricula', $this->matricula]);
+            ->andFilterWhere(['like', 'contacto', $this->contacto]);
 
         return $dataProvider;
     }

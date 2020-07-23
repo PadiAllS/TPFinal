@@ -3,16 +3,17 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Medico;
-use app\models\MedicoSearch;
+use app\models\Obrasocial;
+use app\models\ObrasocialSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * MedicoController implements the CRUD actions for Medico model.
+ * ObrasocialController implements the CRUD actions for Obrasocial model.
  */
-class MedicoController extends Controller
+class ObrasocialController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,22 +31,22 @@ class MedicoController extends Controller
     }
 
     /**
-     * Lists all Medico models.
+     * Lists all Obrasocial models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new MedicoSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Obrasocial::find(),
+        ]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Medico model.
+     * Displays a single Obrasocial model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,16 +59,16 @@ class MedicoController extends Controller
     }
 
     /**
-     * Creates a new Medico model.
+     * Creates a new Obrasocial model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Medico();
+        $model = new Obrasocial();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_medico]);
+            return $this->redirect(['view', 'id' => $model->id_obra_social]);
         }
 
         return $this->render('create', [
@@ -76,7 +77,7 @@ class MedicoController extends Controller
     }
 
     /**
-     * Updates an existing Medico model.
+     * Updates an existing Obrasocial model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -87,7 +88,7 @@ class MedicoController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_medico]);
+            return $this->redirect(['view', 'id' => $model->id_obra_social]);
         }
 
         return $this->render('update', [
@@ -96,7 +97,7 @@ class MedicoController extends Controller
     }
 
     /**
-     * Deletes an existing Medico model.
+     * Deletes an existing Obrasocial model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +111,15 @@ class MedicoController extends Controller
     }
 
     /**
-     * Finds the Medico model based on its primary key value.
+     * Finds the Obrasocial model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Medico the loaded model
+     * @return Obrasocial the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Medico::findOne($id)) !== null) {
+        if (($model = Obrasocial::findOne($id)) !== null) {
             return $model;
         }
 

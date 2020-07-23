@@ -4,46 +4,30 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\MedicoSearch */
+/* @var $model app\models\ObrasocialSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="medico-search">
+<div class="obrasocial-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id_medico') ?>
+    <?= $form->field($model, 'id_obra_social') ?>
 
     <?= $form->field($model, 'nombre') ?>
 
-    <?= $form->field($model, 'apellido') ?>
-
     <?= $form->field($model, 'direccion') ?>
 
-    <?= $form->field($model, 'localidad') ?>
+    <?= $form->field($model, 'telefono') ?>
 
-    <?php // echo $form->field($model, 'codpos') ?>
+    <?= $form->field($model, 'celular') ?>
 
-    <?php // echo $form->field($model, 'telefono') ?>
+    <?php // echo $form->field($model, 'contacto') ?>
 
-    <?php // echo $form->field($model, 'celular') ?>
-
-    <?php // echo $form->field($model, 'fecha_nacimiento') ?>
-
-    <?php // echo $form->field($model, 'sexo') ?>
-
-    <?php // echo $form->field($model, 'tipo_doc') ?>
-
-    <?php // echo $form->field($model, 'nro_doc') ?>
-
-    <?php // echo $form->field($model, 'mail') ?>
-
-    <?php // echo $form->field($model, 'matricula') ?>
-
-    <?php // echo $form->field($model, 'especialidad_id') ?>
+    <?php // echo $form->field($model, 'reintegro') ?>
 
     <?php // echo $form->field($model, 'created_by') ?>
 

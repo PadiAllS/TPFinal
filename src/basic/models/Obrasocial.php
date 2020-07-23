@@ -48,7 +48,7 @@ class Obrasocial extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_obra_social' => 'Id Obra Social',
+            // 'id_obra_social' => 'Id Obra Social',
             'nombre' => 'Nombre',
             'direccion' => 'Direccion',
             'telefono' => 'Telefono',

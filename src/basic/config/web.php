@@ -53,13 +53,16 @@ $config = [
             // 'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 
-                'controller' => ['apiv1/usuario', 'apiv1/especialidad', 'apiv1/medico',
-                'apiv1/patologia',  'apiv1/horarioatencion'],
-            ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => [
+                        'apiv1/usuario', 'apiv1/especialidad', 'apiv1/medico',
+                        'apiv1/patologia',  'apiv1/horarioatencion', 'apiv1/obrasocial'
+                    ],
+                ],
             ],
         ]
-    
+
         // 'urlManager' => [
         //     'enablePrettyUrl' => true,
         //     'showScriptName' => false,
@@ -68,9 +71,9 @@ $config = [
         //         'pluralize' => false,
         //         'controller' => ['apiv1/usuario', 'apiv1/especialidad', 'apiv1/medico'],
         //     ],
-            // ],
-       
-        ],
+        // ],
+
+    ],
     'modules' => [
         'apiv1' => [
             'class' => 'app\modules\apiv1\Apiv1Modules',
@@ -93,7 +96,7 @@ if (YII_ENV_DEV) {
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
-        'allowedIPs' => [ ($_ENV['PRODUCCION'] ? '127.0.0.1' : '*')],
+        'allowedIPs' => [($_ENV['PRODUCCION'] ? '127.0.0.1' : '*')],
     ];
 }
 
