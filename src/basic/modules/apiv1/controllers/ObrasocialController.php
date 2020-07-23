@@ -4,7 +4,7 @@ namespace app\modules\apiv1\controllers;
 
 //use yii\web\Controller;
 
-use app\models\ObraSocial as ModelsObraSocial;
+use app\models\Obrasocial as ModelsObrasocial;
 use app\modules\apiv1\models\Obrasocial;
 use app\models\ObrasocialSearch;
 use app\models\Usuario;
@@ -23,7 +23,7 @@ use yii\web\Response;
 /**
  * Default controller for the `apiv1` module
  */
-class EspecialidadController extends DefaultController
+class ObrasocialController extends DefaultController
 {
     public $modelClass = Obrasocial::class;
 

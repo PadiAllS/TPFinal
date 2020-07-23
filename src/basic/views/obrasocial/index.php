@@ -74,7 +74,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
         <template v-slot:modal-footer="{ok, cancel, hide}">
             <button v-if="" @click="addObrasocial()" type="button" class="btn btn-primary m-3">Crear</button>
             <button v-if="!isNewRecord" @click="isNewRecord = !isNewRecord" v-on:click="obrasocial={}" type="button" class="btn btn-success m-3">Nuevo</button>
-            <button v-if="!isNewRecord" @click="updateObrasocial(obrasocual.id_obra_social)" type="button" class="btn btn-primary m-3">Actualizar</button>
+            <button v-if="!isNewRecord" @click="updateObrasocial(obrasocial.id_obra_social)" type="button" class="btn btn-primary m-3">Actualizar</button>
 
         </template>
     </b-modal>
@@ -201,7 +201,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
             },
             deleteObrasocial: function(id) {
                 var self = this;
-                axios.delete('/apiv1/obrasocials/' + id)
+                axios.delete('/apiv1/obrasocial/' + id)
                     .then(function(response) {
                         // handle success
                         console.log("Borrar Obra social id: " + id);
