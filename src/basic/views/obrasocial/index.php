@@ -29,7 +29,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
     </b-container>
 
 
-    <b-modal v-model="showModal" id="my-modal">
+    <b-modal v-model="showModal" title="Sistema Obra-Social" :header-bg-variant="headerBgVariant" :header-text-variant="headerTextVariant" :body-bg-variant="bodyBgVariant" :body-text-variant="bodyTextVariant" :footer-bg-variant="footerBgVariant" :footer-text-variant="footerTextVariant" id="my-modal">
         <form action="">
             <div class="form-group">
                 <label for="nombre">Nombre</label>
@@ -70,9 +70,8 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
 
         </form>
         <template v-slot:modal-footer="{ok, cancel, hide}">
-            <button v-if="isNewRecord" @click="addObrasocial()" type="button" class="btn btn-primary m-3">Crear</button>
-            <!-- <button v-if="!isNewRecord" @click="isNewRecord = !isNewRecord" v-on:click="obrasocial={}" type="button" class="btn btn-success m-3">Nuevo</button> -->
-            <button v-if="!isNewRecord" @click="updateObrasocial(obrasocial.id_obra_social)" type="button" class="btn btn-primary m-3">Actualizar</button>
+            <b-button v-if="isNewRecord" @click="addObrasocial()" variant="warning" size="lg">Nueva Obra-Social</b-button>
+            <b-button v-if="!isNewRecord" @click="updateObrasocial(obrasocial.id_obra_social)" variant="warning" size="lg">Actualizar ObraSocial</b-button>
 
         </template>
     </b-modal>
@@ -155,16 +154,17 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                 currentPage: 1,
                 pagination: {},
                 showModal: false,
+                headerBgVariant: 'dark',
+                headerTextVariant: 'warning',
+                bodyBgVariant: 'info',
+                bodyTextVariant: 'dark',
+                footerBgVariant: 'dark',
             }
         },
         mounted() {
             this.getObrasocial();
         },
-        watch: {
-            currentPage: function() {
-                this.getPatologias();
-            }
-        },
+
         methods: {
             normalizeErrors: function(errors) {
                 var allErrors = {};
