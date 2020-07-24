@@ -11,18 +11,18 @@ use Yii;
  * @property string $nombre
  * @property string $apellido
  * @property string $direccion
- * @property int $telefono
- * @property int $celular
+ * @property string $telefono
+ * @property string $celular
  * @property string|null $sexo
- * @property string $tipo_doc
- * @property int $nro_doc
+ * @property string|null $tipo_doc
+ * @property string|null $nro_doc
  * @property string|null $nom_ape_mat
  * @property string|null $nom_ape_pat
  * @property int|null $obra_social_id
  * @property string $num_afil
  * @property string $fecha_nacimiento
  * @property string $responsable_nombre
- * @property string $resoponsable_telef
+ * @property string $responsable_telef
  * @property int|null $created_by
  * @property int|null $created_at
  * @property int|null $updated_by
@@ -48,14 +48,14 @@ class Paciente extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'apellido', 'direccion', 'telefono', 'celular', 'tipo_doc', 'nro_doc', 'num_afil', 'fecha_nacimiento', 'responsable_nombre', 'resoponsable_telef'], 'required'],
-            [['telefono', 'celular', 'nro_doc', 'obra_social_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['sexo', 'tipo_doc'], 'string'],
+            [['nombre', 'apellido', 'direccion', 'telefono', 'celular', 'num_afil', 'fecha_nacimiento', 'responsable_nombre', 'responsable_telef'], 'required'],
+            [['obra_social_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['fecha_nacimiento'], 'safe'],
-            [['nombre', 'apellido', 'direccion', 'nom_ape_mat', 'nom_ape_pat'], 'string', 'max' => 250],
+            [['nombre', 'apellido', 'direccion', 'telefono', 'celular', 'tipo_doc', 'nro_doc', 'nom_ape_mat', 'nom_ape_pat'], 'string', 'max' => 250],
+            [['sexo'], 'string', 'max' => 255],
             [['num_afil'], 'string', 'max' => 200],
             [['responsable_nombre'], 'string', 'max' => 100],
-            [['resoponsable_telef'], 'string', 'max' => 50],
+            [['responsable_telef'], 'string', 'max' => 50],
             [['obra_social_id'], 'exist', 'skipOnError' => true, 'targetClass' => ObraSocial::className(), 'targetAttribute' => ['obra_social_id' => 'id_obra_social']],
         ];
     }
@@ -81,7 +81,7 @@ class Paciente extends \yii\db\ActiveRecord
             'num_afil' => 'Num Afil',
             'fecha_nacimiento' => 'Fecha Nacimiento',
             'responsable_nombre' => 'Responsable Nombre',
-            'resoponsable_telef' => 'Resoponsable Telef',
+            'responsable_telef' => 'Responsable Telef',
             'created_by' => 'Created By',
             'created_at' => 'Created At',
             'updated_by' => 'Updated By',
@@ -92,7 +92,7 @@ class Paciente extends \yii\db\ActiveRecord
     /**
      * Gets query for [[ObraSocial]].
      *
-     * @return \yii\db\ActiveQuery|ObraSocialQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getObraSocial()
     {
@@ -102,7 +102,7 @@ class Paciente extends \yii\db\ActiveRecord
     /**
      * Gets query for [[PacientePatologias]].
      *
-     * @return \yii\db\ActiveQuery|PacientePatologiaQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getPacientePatologias()
     {
@@ -112,19 +112,10 @@ class Paciente extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Turnos]].
      *
-     * @return \yii\db\ActiveQuery|TurnosQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getTurnos()
     {
         return $this->hasMany(Turnos::className(), ['paciente_id' => 'id_paciente']);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return PacienteQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new PacienteQuery(get_called_class());
     }
 }

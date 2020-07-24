@@ -18,7 +18,7 @@ class MedicoSearch extends Medico
     {
         return [
             [['id_medico', 'telefono', 'celular', 'especialidad_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['nombre', 'apellido', 'direccion', 'localidad', 'codpos', 'fecha_nacimiento', 'sexo', 'tipo_doc', 'nro_doc', 'mail', 'matricula'], 'safe'],
+            [['nombre', 'apellido', 'direccion', 'fecha_nacimiento', 'sexo', 'tipo_doc', 'nro_doc', 'mail'], 'safe'],
         ];
     }
 
@@ -48,7 +48,7 @@ class MedicoSearch extends Medico
             'query' => $query,
         ]);
 
-        $this->load($params,'');
+        $this->load($params, '');
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -72,12 +72,12 @@ class MedicoSearch extends Medico
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
             ->andFilterWhere(['like', 'apellido', $this->apellido])
             ->andFilterWhere(['like', 'direccion', $this->direccion])
-            ->andFilterWhere(['like', 'localidad', $this->localidad])
-            ->andFilterWhere(['like', 'codpos', $this->codpos])
+            // ->andFilterWhere(['like', 'localidad', $this->localidad])
+            // ->andFilterWhere(['like', 'codpos', $this->codpos])
             ->andFilterWhere(['like', 'sexo', $this->sexo])
             ->andFilterWhere(['like', 'tipo_doc', $this->tipo_doc])
             ->andFilterWhere(['like', 'nro_doc', $this->nro_doc])
-            ->andFilterWhere(['like', 'mail', $this->mail])
+            // ->andFilterWhere(['like', 'mail', $this->mail])
             ->andFilterWhere(['like', 'matricula', $this->matricula]);
 
         return $dataProvider;

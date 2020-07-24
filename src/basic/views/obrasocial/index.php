@@ -11,24 +11,22 @@ $this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue
 $this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js", ['position' => $this::POS_HEAD]);
 
 $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['position' => $this::POS_HEAD]);
+$this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' => $this::POS_HEAD]);
 
 ?>
 
 <div id="app" class="container">
-    <div>
-        <b-jumbotron bg-variant="info" text-variant="white" border-variant="dark">
-            <b-container fluid='' class="text-center">
-                <b-row>
-                    <b-col>
-                        <template>
-                            <h1>{{msg}}
-                                <b-icon icon="pencil-square"></b-icon>
-                            </h1>
-                        </template>
-                    </b-col>
-                </b-row>
-        </b-jumbotron>
-    </div>
+    <b-container class="mb-3 bv-example-row bg-success text-center text-light">
+        <b-row>
+            <b-col>
+                <h1>{{msg}}
+                    <b-icon icon="pencil-square" animation="throb" font-scale="1" class="rounded-circle  p-2" variant="light"></b-icon>
+                </h1>
+            </b-col>
+
+        </b-row>
+
+    </b-container>
 
 
     <b-modal v-model="showModal" id="my-modal">
@@ -72,8 +70,8 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
 
         </form>
         <template v-slot:modal-footer="{ok, cancel, hide}">
-            <button v-if="" @click="addObrasocial()" type="button" class="btn btn-primary m-3">Crear</button>
-            <button v-if="!isNewRecord" @click="isNewRecord = !isNewRecord" v-on:click="obrasocial={}" type="button" class="btn btn-success m-3">Nuevo</button>
+            <button v-if="isNewRecord" @click="addObrasocial()" type="button" class="btn btn-primary m-3">Crear</button>
+            <!-- <button v-if="!isNewRecord" @click="isNewRecord = !isNewRecord" v-on:click="obrasocial={}" type="button" class="btn btn-success m-3">Nuevo</button> -->
             <button v-if="!isNewRecord" @click="updateObrasocial(obrasocial.id_obra_social)" type="button" class="btn btn-primary m-3">Actualizar</button>
 
         </template>
@@ -200,21 +198,36 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
                     });
             },
             deleteObrasocial: function(id) {
-                var self = this;
-                axios.delete('/apiv1/obrasocial/' + id)
-                    .then(function(response) {
-                        // handle success
-                        console.log("Borrar Obra social id: " + id);
-                        console.log(response.data);
-                        self.getObrasocial();
-                    })
-                    .catch(function(error) {
-                        // handle error
-                        console.log(error);
-                    })
-                    .then(function() {
-                        // always executed
-                    });
+                Swal.fire({
+                    title: 'Esta seguro que desea borrar el registro ' + id + '?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    showConfirmButton: true,
+                    confirmButtonText: 'Si borrar!',
+                    cancelButtonText: 'No, regresar.',
+                }).then((result) => {
+                    if (result.value) {
+                        var self = this;
+                        axios.delete('/apiv1/obrasocials/' + id)
+                            .then(function(response) {
+                                // handle success
+                                console.log("Borrar Obra social id: " + id);
+                                console.log(response.data);
+                                self.getObrasocial();
+                            })
+                            .catch(function(error) {
+                                // handle error
+                                console.log(error);
+                            })
+                            .then(function() {
+                                // always executed
+                            });
+                        Swal.fire({
+                            title: 'Se ha borrado con exito',
+                            icon: 'success',
+                        })
+                    }
+                }, );
             },
             editObrasocial: function(key) {
                 this.obrasocial = Object.assign({}, this.obrassocial[key]);
@@ -230,6 +243,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
                         self.getObrasocial()
                         // self.posts.unshift(response.data);
                         self.obrasocial = {};
+                        self.showModal = false;
                     })
                     .catch(function(error) {
                         // handle error
@@ -240,6 +254,12 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
                     .then(function() {
                         // always executed
                     });
+                Swal.fire({
+                    title: 'Se creo el registro correctamente',
+                    icon: 'success',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Aceptar',
+                })
             },
             updateObrasocial: function(key) {
                 var self = this;
@@ -257,6 +277,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
                         self.getObrasocial();
                         self.obrasocial = {};
                         self.isNewRecord = true;
+                        self.showModal = false;
                     })
                     .catch(function(error) {
                         // handle error

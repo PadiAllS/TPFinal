@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Medicoatencion;
+use app\models\Paciente;
 
 /**
- * MedicoatencionSearch represents the model behind the search form of `app\models\Medicoatencion`.
+ * PacienteSearch represents the model behind the search form of `app\models\Paciente`.
  */
-class MedicoatencionSearch extends Medicoatencion
+class PacienteSearch extends Paciente
 {
     /**
      * {@inheritdoc}
@@ -17,7 +17,8 @@ class MedicoatencionSearch extends Medicoatencion
     public function rules()
     {
         return [
-            [['id_medicoatencion', 'medico_id', 'hatencion_id', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
+            [['id_paciente', 'telefono', 'celular', 'nro_doc', 'obra_social_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
+            [['nombre', 'apellido', 'num_afil'], 'safe'],
         ];
     }
 
@@ -39,7 +40,7 @@ class MedicoatencionSearch extends Medicoatencion
      */
     public function search($params)
     {
-        $query = Medicoatencion::find();
+        $query = Paciente::find();
 
         // add conditions that should always apply here
 
@@ -57,14 +58,22 @@ class MedicoatencionSearch extends Medicoatencion
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id_medicoatencion' => $this->id_medicoatencion,
-            'medico_id' => $this->medico_id,
-            'hatencion_id' => $this->hatencion_id,
+            'id_paciente' => $this->id_paciente,
+            'telefono' => $this->telefono,
+            'celular' => $this->celular,
+            'nro_doc' => $this->nro_doc,
+            'obra_social_id' => $this->obra_social_id,
+            'fecha_nacimiento' => $this->fecha_nacimiento,
             'created_by' => $this->created_by,
-            'updated_by' => $this->updated_by,
             'created_at' => $this->created_at,
+            'updated_by' => $this->updated_by,
             'updated_at' => $this->updated_at,
         ]);
+
+        $query->andFilterWhere(['like', 'nombre', $this->nombre])
+            ->andFilterWhere(['like', 'apellido', $this->apellido])
+            ->andFilterWhere(['like', 'num_afil', $this->num_afil]);
+
 
         return $dataProvider;
     }

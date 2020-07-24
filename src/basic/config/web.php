@@ -57,7 +57,7 @@ $config = [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
                         'apiv1/usuario', 'apiv1/especialidad', 'apiv1/medico',
-                        'apiv1/patologia',  'apiv1/horarioatencion', 'apiv1/obrasocial'
+                        'apiv1/patologia',  'apiv1/horarioatencion', 'apiv1/obrasocial', 'apiv1/paciente'
                     ],
                 ],
             ],
