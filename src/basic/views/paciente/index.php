@@ -52,10 +52,11 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                 <div class="row">
                     <div class="col  md-4">
                         <label for="sexo">Sexo</label>
-                        <input v-model="paciente.sexo" type="text" name="sexo" id="sexo" class="form-control" placeholder="Sexo de la persona" aria-describedby="helpId">
-                        <small id="bodyhelpId" class="text-muted"></small>
-                        <span class="text-danger" v-if="errors.sexo">{{ errors.sexo }}</span>
-
+                        <b-form-select v-model="paciente.sexo" :options="sexos" id="sexo"></b-form-select>
+                        <!-- <input v-model="paciente.sexo" type="text" name="sexo" id="sexo" class="form-control" placeholder="Sexo de la persona" aria-describedby="helpId"> -->
+                        <!-- <small id="bodyhelpId" class="text-muted"></small>
+                        <span class="text-danger" v-if="errors.sexo">{{ errors.sexo }}</span> -->
+                        <!-- <div class="mt-3"><strong>{{ paciente.sexo }}</strong></div> -->
                     </div>
                     <div class="col md-4">
                         <div class="form-group text-center">
@@ -91,10 +92,8 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                     <div class="col md-4">
                         <div class="form-group">
                             <label for="tipo_doc">Tipo DOC</label>
-                            <input v-model="paciente.tipo_doc" type="text" name="tipo_doc" id="tipo_doc" class="form-control" placeholder="Ingrese tipo de documento" aria-describedby="helpId">
-                            <small id="bodyhelpId" class="text-muted"></small>
-                            <span class="text-danger" v-if="errors.tipo_doc">{{ errors.tipo_doc }}</span>
-
+                            <b-form-select v-model="paciente.tipo_doc" :options="docs" id="doc"></b-form-select>
+                            <div class="mt-3"><strong>{{ paciente.tipo_doc }}</strong></div>
                         </div>
                     </div>
                     <div class="col md-4">
@@ -247,6 +246,8 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                 isNewRecord: true,
                 currentPage: 1,
                 pagination: {},
+                docs: ['DNI', 'Carnet Extranjero', 'RUC', 'PASAPORTE', 'P.NAC', 'Otros'],
+                sexos: ['Masculino', 'Femenino', 'Bisexual', 'Transexual', 'Indefinido'],
                 showModal: false,
                 headerBgVariant: 'dark',
                 headerTextVariant: 'warning',
