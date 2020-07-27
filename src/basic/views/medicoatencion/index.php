@@ -19,7 +19,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
     <!-- Button trigger modal -->
     <div class="form-group">
         <label for="especialidad">Elija el medico</label>
-            <select class="form-control" v-model="medico_id">  
+            <select class="form-control" v-model="medicoAtencion.medico_id">  
                 <option :value="medicos.id_medico" v-for="med in medicos">
                     {{med.apellido}}
                 </option>
@@ -28,7 +28,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
         <span></span>
     </div>
     
-    <!-- <b-modal v-model="showModal" id="my-modal">
+    <b-modal v-model="showModal" id="my-modal">
             <form action="">
                 <div class="form-group">
                     <label for="dia">Dia de la Semana</label>
@@ -37,13 +37,13 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                 </div>
                 <div class="form-group">
                     <label for="desde">Desde</label>
-                    <input v-model="horaatencion.desde" type="time" name="desde" id="desde" class="form-control" placeholder="Ingrese descripcion" aria-describedby="helpId">
+                    <input v-model="horaAtencion.desde" type="time" name="desde" id="desde" class="form-control" placeholder="Ingrese descripcion" aria-describedby="helpId">
                     <small id="bodyhelpId" class="text-muted"></small>
                     <span class="text-danger" v-if="errors.desde"> {{ errors.desde }} </span>
                 </div>
                 <div class="form-group">
                     <label for="hasta">Hasta</label>
-                    <input v-model="horaatencion.hasta" type="time" name="hasta" id="hasta" class="form-control" placeholder="Ingrese descripcion" aria-describedby="helpId">
+                    <input v-model="horaAtencion.hasta" type="time" name="hasta" id="hasta" class="form-control" placeholder="Ingrese descripcion" aria-describedby="helpId">
                     <small id="bodyhelpId" class="text-muted"></small>
                     <span class="text-danger" v-if="errors.hasta"> {{ errors.hasta }} </span>
                 </div>
@@ -57,12 +57,12 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
     </b-modal> -->
 
 
-        <!-- <b-pagination
+        <b-pagination
             v-model="currentPage"
             :total-rows="pagination.total"
             :per-page="pagination.perPage"
-            aria-controls="my-table"
-        ></b-pagination> -->
+            aria-controls="my-table">
+        </b-pagination>
 
     <p>
         <button @click="showModal=true" type="button" class="btn btn-primary">Agregar horario de atencion</button>
@@ -79,20 +79,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
             <th></th>
             <th></th>
         </tr>
-        <!-- <tr>
-            <td>
-                <input v-on:change="getHoraatencion()" class="form-control" v-model="filter.id_hatencion">
-            </td>
-            <td>
-                <input v-on:change="getHoraatencion()" class="form-control" v-model="filter.dia">
-            </td>
-            <td>
-                <input v-on:change="getHoraatencion()" class="form-control" v-model="filter.desde">
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr> -->
+   
         </thead>
 
         <tbody>
@@ -134,9 +121,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                 showModal:false,
                 dias:['Lunes','Martes','Miercoles','Jueves','Viernes'],
                 medicos:[], // listado de medicos
-                horarioxmedico: {},
-                medico_id: '',
-                hatencion_id: '',
+                horarioxmedico: [],
             }
         },
         mounted() {
@@ -158,9 +143,10 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
                 return allErrors;
             },
             buscarxmedico: function(medicosHorarios){
-                for(let i=0 ; i<medicosHorarios.length; i++){
-                    if(medicosHorarios.medico_id === medico_id){
-                        this.horarioxmedico = medicoAtencion;
+                for(let i=0 ; i < medicosHorarios.length; i++){
+                    if(medicosHorarios[i].medico_id === parseInt(medicoAtencion.medico_id)){
+                        console.log(medicosHorarios[i]);
+                        this.horarioxmedico = medicosHorarios[i];
                     }
                     return horarioxmedico;
                 }
@@ -237,7 +223,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
             },
             addHoraatencion: function(){
                 var self = this;
-                axios.post('/apiv1/horaatencion',self.horaatencion)
+                axios.post('/apiv1/horaatencion',self.horaAtencion)
                     .then(function (response) {
                         // handle success
                         console.log(response.data);
