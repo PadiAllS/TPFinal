@@ -8,6 +8,7 @@
 </p>
 Descripción
 -------------------
+
 Aplicación Web para uso y gestión de información clinica.
 
 Estructura de directorios
@@ -87,4 +88,5 @@ Ejecutar por consola **first-start.sh** encontrado en la carpeta /bin.
    $ TPFinal/ docker-compose up
  ``` 
  Acceder al sitio desde la url : **localhost:8000** - PhpMyAdmin : **localhost:8001**
+ 
  Usuario Prueba : **admin** pass: **admin**
