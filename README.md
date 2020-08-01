@@ -6,102 +6,85 @@
     <h1 align="center">Trabajo Práctico Final</h1>
     <br>
 </p>
+Descripción
+-------------------
+Aplicación Web para uso y gestión de información clinica.
 
-DIRECTORY STRUCTURE
+Estructura de directorios
 -------------------
 
-      assets/             contains assets definition
-      commands/           contains console commands (controllers)
-      config/             contains application configurations
-      controllers/        contains Web controller classes
-      mail/               contains view files for e-mails
-      models/             contains model classes
-      modules/            contains modules API
-      runtime/            contains files generated during runtime
-      tests/              contains various tests for the basic application
-      vendor/             contains dependent 3rd-party packages
-      views/              contains view files for the Web application
+      bin/                contiene los scripts para la instalacion y configuracion de la Aplicacion
+      config/             contiene configuraciones de la aplicación
+      controllers/        contiene los controladores y clases web
+      models/             contiene los modelos de las clases
+      modules/            contiene los modulos,controladores,modelos de la API
+      runtime/            contiene archivos generados durante la ejecucion
+      vendor/             contiene packetes dependientes
+      views/              contiene las vistas de aplicacion Web
       web/                contains the entry script and Web resources
 
-
-
-REQUIREMENTS
+REQUERIMIENTOS
 ------------
 
-The minimum requirement by this project template that your Web server supports PHP 5.4.0.
+-El requisito mínimo  de proyecto es que su servidor web sea compatible con [PHP](https://www.php.net/) 5.4.0.
+-GIT(https://git-scm.com/)
+-[docker](https://get.docker.com/) y [docker-composer](http://getcomposer.org/)
 
-
-INSTALLATION
+Instalación
 ------------
-
-### Install via Composer
-
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
-
-
-### Install from an Script of this Project:
-
-Execute for console this file **start-project.sh** in folder bin. 
-
-
-### Install with Docker and permissions in your System
-
-Run the script in console **first-start.sh** in carpeta bin.
-
-Update your vendor packages
+Clonar el repositorio de github
  ```
-   $ docker-compose run --rm php composer update --prefer-dist
+   $ git clone https://github.com/PadiAllS/TPFinal.git
+ ``` 
+Renombrar el archivo **docker-compose.dist.yml** por **docker-compose.yml**
+-Desde consola
+ ```
+   $ cp docker-compose.dist.yml docker-compose.yml
  ```   
-Run the installation triggers (creating cookie validation code)
- ```
-  $  docker-compose run --rm php composer install    
-  ```   
-    
-CONFIGURATION
--------------
-Rename file **docker-compose.dist.yml** to **docker-compose.yml**
-
-### Database
-
-Edit the file `docker-compose.yml` with real data, for example:
+ 
+Editar el archivo `docker-compose.yml` con datos reales personal, por ejemplo:
 
 ```services:
    db:
      image: mysql:5.7.27
      environment:
-        MYSQL_DATABASE: dbname
-        MYSQL_ROOT_PASSWORD: passroot
+        MYSQL_DATABASE: nombredeladb
+        MYSQL_ROOT_PASSWORD: contradeusuario
 ```
-### Config Yii2 with MySQL
 
-Edit the file `docker-compose.yml` with real data, for example:
-
-```   ports:
+```app:
+    ports:
         - 8000:80
       environment:
-        DB_DATABASE: dbname
-        DB_PASSWORD: passroot
+        DB_DATABASE: nombredeladb
+        DB_PASSWORD: contradeusuario
         DB_HOST: db
 ```
-### Config PhpMyAdmin with project
-```
+``` phpmyadmin:
          PMA_HOST: db
          PMA_USER: root
-         PMA_PASSWORD: dbname
+         PMA_PASSWORD: contradeusuario
          PMA_PORT: 3306
       ports:
-         - 8001:80
-```     
-Start the container
+```      
+### Ejecucion de inicio :
+
+Ejecutar por consola **start-project.sh** encontrado en la carpeta /bin. 
+```
+   $ TPFinal/bin/start-project.sh
+ ``` 
+
+Ejecutar por consola **first-start.sh** encontrado en la carpeta /bin.
+```
+   $ TPFinal/bin/first-start.sh
+ ``` 
+ Ejecutar por consola **yii.sh migrate/up** para la migracion de la base de datos 
  ```
-  $  docker-compose up -d
- ```   
-### (Optional) Create  database and update it by applying migrations if you have them.
-
- Run from a script of this project to facilitate:
-
-Execute for console this file **yii.sh** in folder bin. 
-   ```
- $ yii migrate/create <name>
-   ```
+   $ TPFinal/bin/yii.sh migrate/up
+ ``` 
+ Finalmente ejecutar y levantar el repositorio. 
+ ```
+   $ TPFinal/ docker-compose up
+ ``` 
+ Acceder al sitio desde la url : **localhost:8000** - PhpMyAdmin : **localhost:8001**
+ Usuario Prueba : **admin** pass: **admin**
