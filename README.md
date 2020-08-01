@@ -2,8 +2,8 @@
     <a href="https://www.uncoma.edu.ar" target="_blank">
         <img src="https://www.uncoma.edu.ar/wp-content/uploads/2018/04/LOGOUNC-e1522858761795.png" height="100px">
     </a>
+    <h2 align="center">Tecnicatura Universitaria en Desarrollo Web</h2>
     <h1 align="center">Trabajo Práctico Final</h1>
-    <h1 align="center">Tecnicatura Universitaria en Desarrollo Web</h1>
     <br>
 </p>
 
