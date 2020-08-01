@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Paciente;
+use app\models\Pacientepatologia;
 
 /**
- * PacienteSearch represents the model behind the search form of `app\models\Paciente`.
+ * PacientepatologiaSearch represents the model behind the search form of `app\models\Pacientepatologia`.
  */
-class PacienteSearch extends Paciente
+class PacientepatologiaSearch extends Pacientepatologia
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,7 @@ class PacienteSearch extends Paciente
     public function rules()
     {
         return [
-            [['id_paciente', 'telefono', 'celular', 'nro_doc', 'obra_social_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['nombre', 'apellido', 'num_afil'], 'safe'],
+            [['id_paciente_patologia', 'paciente_id', 'patologia_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
         ];
     }
 
@@ -40,7 +39,7 @@ class PacienteSearch extends Paciente
      */
     public function search($params)
     {
-        $query = Paciente::find();
+        $query = Pacientepatologia::find();
 
         // add conditions that should always apply here
 
@@ -48,7 +47,7 @@ class PacienteSearch extends Paciente
             'query' => $query,
         ]);
 
-        $this->load($params, '');
+        $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -58,22 +57,17 @@ class PacienteSearch extends Paciente
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id_paciente' => $this->id_paciente,
-            'telefono' => $this->telefono,
-            'celular' => $this->celular,
-            'nro_doc' => $this->nro_doc,
-            'obra_social_id' => $this->obra_social_id,
-            'fecha_nacimiento' => $this->fecha_nacimiento,
+            'id_paciente_patologia' => $this->id_paciente_patologia,
+            'paciente_id' => $this->paciente_id,
+            'patologia_id' => $this->patologia_id,
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
             'updated_by' => $this->updated_by,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'apellido', $this->apellido])
-            ->andFilterWhere(['like', 'nro_doc', $this->nro_doc])
-            ->andFilterWhere(['like', 'num_afil', $this->num_afil]);
+        $query->andFilterWhere(['like', 'paciente_id', $this->paciente_id])
+            ->andFilterWhere(['like', 'patologia_id', $this->patologia_id]);
 
 
         return $dataProvider;

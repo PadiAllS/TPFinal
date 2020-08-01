@@ -7,15 +7,15 @@ use yii\behaviors\TimestampBehavior;
 
 class Medicoatencion extends ModelsMedicoatencion
 {
-    
+
     public function fields()
     {
-        return ['id_medicoatencion', 'medico_id', 'hatencion_id','medico','hora_atencion'];
+        return ['id_medicoatencion', 'medico_id', 'hatencion_id', 'medico', 'hora_atencion'];
     }
-    
+
     public function estraFields()
     {
-        return ['medico_id','hatencion_id'];
+        return ['medico_id', 'hatencion_id'];
     }
 
     public function getMedico()

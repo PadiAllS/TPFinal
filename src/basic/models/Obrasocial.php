@@ -14,7 +14,6 @@ use yii\behaviors\TimestampBehavior;
  * @property int|null $telefono
  * @property int|null $celular
  * @property string|null $contacto
- * @property int|null $reintegro
  * @property int|null $created_by
  * @property int|null $created_at
  * @property int|null $updated_by
@@ -38,7 +37,7 @@ class Obrasocial extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['telefono', 'celular', 'reintegro', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
+            [['telefono', 'celular', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['nombre', 'direccion', 'contacto'], 'string', 'max' => 250],
         ];
     }
@@ -55,7 +54,6 @@ class Obrasocial extends \yii\db\ActiveRecord
             'telefono' => 'Telefono',
             'celular' => 'Celular',
             'contacto' => 'Contacto',
-            'reintegro' => 'Reintegro',
             'created_by' => 'Created By',
             'created_at' => 'Created At',
             'updated_by' => 'Updated By',

@@ -17,7 +17,7 @@ class ObrasocialSearch extends Obrasocial
     public function rules()
     {
         return [
-            [['id_obra_social', 'telefono', 'celular', 'reintegro', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
+            [['id_obra_social', 'telefono', 'celular', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['nombre', 'direccion', 'contacto'], 'safe'],
         ];
     }
@@ -48,7 +48,7 @@ class ObrasocialSearch extends Obrasocial
             'query' => $query,
         ]);
 
-        $this->load($params,'');
+        $this->load($params, '');
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -61,7 +61,6 @@ class ObrasocialSearch extends Obrasocial
             'id_obra_social' => $this->id_obra_social,
             'telefono' => $this->telefono,
             'celular' => $this->celular,
-            'reintegro' => $this->reintegro,
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
             'updated_by' => $this->updated_by,

@@ -2,15 +2,15 @@
 /* @var $this yii\web\View */
 
 //$this->registerCssFile("https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css",['position'=>$this::POS_HEAD]);
-$this->registerCssFile("//unpkg.com/bootstrap/dist/css/bootstrap.min.css",['position'=>$this::POS_HEAD]);
-$this->registerCssFile("//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css",['position'=>$this::POS_HEAD]);
+$this->registerCssFile("//unpkg.com/bootstrap/dist/css/bootstrap.min.css", ['position' => $this::POS_HEAD]);
+$this->registerCssFile("//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css", ['position' => $this::POS_HEAD]);
 
-$this->registerJsFile("https://cdn.jsdelivr.net/npm/vue/dist/vue.js",['position'=>$this::POS_HEAD]);
-$this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js",['position'=>$this::POS_HEAD]);
+$this->registerJsFile("https://cdn.jsdelivr.net/npm/vue/dist/vue.js", ['position' => $this::POS_HEAD]);
+$this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js", ['position' => $this::POS_HEAD]);
 
-$this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js",['position'=>$this::POS_HEAD]);
+$this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js", ['position' => $this::POS_HEAD]);
 
-$this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['position'=>$this::POS_HEAD]);
+$this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['position' => $this::POS_HEAD]);
 
 ?>
 
@@ -19,108 +19,106 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
     <!-- Button trigger modal -->
     <div class="form-group">
         <label for="especialidad">Elija el medico</label>
-            <select class="form-control" v-model="medicoAtencion.medico_id">  
-                <option :value="medicos.id_medico" v-for="med in medicos">
-                    {{med.apellido}}
-                </option>
-            </select>
+        <select ref="seleccionado" class="form-control" v-model="medicoAtencion.medico_id">
+            <option :value="medicos.id_medico" v-for="med in medicos">
+                {{med.apellido}}
+            </option>
+        </select>
         <small id="bodyhelpId" class="text-muted"></small>
         <span></span>
     </div>
-    
+
     <b-modal v-model="showModal" id="my-modal">
-            <form action="">
-                <div class="form-group">
-                    <label for="dia">Dia de la Semana</label>
-                    <b-form-select v-model="horaAtencion.dia" :options="dias"></b-form-select>
-                    <div class="mt-3"><strong>{{ horaAtencion.dia }}</strong></div>
-                </div>
-                <div class="form-group">
-                    <label for="desde">Desde</label>
-                    <input v-model="horaAtencion.desde" type="time" name="desde" id="desde" class="form-control" placeholder="Ingrese descripcion" aria-describedby="helpId">
-                    <small id="bodyhelpId" class="text-muted"></small>
-                    <span class="text-danger" v-if="errors.desde"> {{ errors.desde }} </span>
-                </div>
-                <div class="form-group">
-                    <label for="hasta">Hasta</label>
-                    <input v-model="horaAtencion.hasta" type="time" name="hasta" id="hasta" class="form-control" placeholder="Ingrese descripcion" aria-describedby="helpId">
-                    <small id="bodyhelpId" class="text-muted"></small>
-                    <span class="text-danger" v-if="errors.hasta"> {{ errors.hasta }} </span>
-                </div>
-            </form>
-            <template v-slot:modal-footer="{ok, cancel, hide}">
-                <button v-if="isNewRecord"  @click="addHoraatencion()" type="button" class="btn btn-primary m-3">Crear</button>
-                <button v-if="!isNewRecord" @click="isNewRecord = !isNewRecord" v-on:click="horaatencion={}"  type="button" class="btn btn-success m-3">Nuevo</button>
-                <button v-if="!isNewRecord" @click="updateHoraatencion(horarios.id_hatencion)" type="button" class="btn btn-primary m-3">Actualizar</button>
+        <form action="">
+            <div class="form-group">
+                <label for="dia">Dia de la Semana</label>
+                <b-form-select v-model="horaAtencion.dia" :options="dias"></b-form-select>
+                <div class="mt-3"><strong>{{ horaAtencion.dia }}</strong></div>
+            </div>
+            <div class="form-group">
+                <label for="desde">Desde</label>
+                <input v-model="horaAtencion.desde" type="time" name="desde" id="desde" class="form-control" placeholder="Ingrese descripcion" aria-describedby="helpId">
+                <small id="bodyhelpId" class="text-muted"></small>
+                <span class="text-danger" v-if="errors.desde"> {{ errors.desde }} </span>
+            </div>
+            <div class="form-group">
+                <label for="hasta">Hasta</label>
+                <input v-model="horaAtencion.hasta" type="time" name="hasta" id="hasta" class="form-control" placeholder="Ingrese descripcion" aria-describedby="helpId">
+                <small id="bodyhelpId" class="text-muted"></small>
+                <span class="text-danger" v-if="errors.hasta"> {{ errors.hasta }} </span>
+            </div>
+        </form>
+        <template v-slot:modal-footer="{ok, cancel, hide}">
+            <button v-if="isNewRecord" @click="addHoraatencion()" type="button" class="btn btn-primary m-3">Crear</button>
+            <button v-if="!isNewRecord" @click="isNewRecord = !isNewRecord" v-on:click="horaatencion={}" type="button" class="btn btn-success m-3">Nuevo</button>
+            <button v-if="!isNewRecord" @click="updateHoraatencion(horarios.id_hatencion)" type="button" class="btn btn-primary m-3">Actualizar</button>
 
-            </template>      
-    </b-modal> -->
+        </template>
+    </b-modal>
 
 
-        <b-pagination
-            v-model="currentPage"
-            :total-rows="pagination.total"
-            :per-page="pagination.perPage"
-            aria-controls="my-table">
-        </b-pagination>
+    <b-pagination v-model="currentPage" :total-rows="pagination.total" :per-page="pagination.perPage" aria-controls="my-table">
+    </b-pagination>
 
     <p>
         <button @click="showModal=true" type="button" class="btn btn-primary">Agregar horario de atencion</button>
     </p>
 
-    
+
     <table class="table">
         <thead>
-        <tr>
-            <th>Id</th>
-            <th>Dia</th>
-            <th>Desde</th>
-            <th>Hasta</th>
-            <th></th>
-            <th></th>
-        </tr>
-   
+            <tr>
+                <th>Id Medico</th>
+                <th>Nombre</th>
+                <th>Horarios</th>
+                <th>Dia</th>
+                <th>Desde</th>
+                <th>Hasta</th>
+                <th></th>
+                <th></th>
+            </tr>
+
         </thead>
 
         <tbody>
-        <tr v-for="(hmed,key) in horarioxmedico" v-bind:key="hate.id_hatencion">
-            <td scope="row">{{hmed.hatencion_id}}</td>
-            <td>{{hmed.dia}}</td>
-            <td>{{hmed.desde}}</td>
-            <td>{{hmed.hasta}}</td>
-            
-            <td>
-                <button @click="showModal=true" v-on:click="editHoraatencion(key)" type="button" class="btn btn-warning">Editar</button>
-            </td>
-            <td>
-                <button v-on:click="deleteHoraatencion(hate.id_hatencion)" type="button" class="btn btn-danger">Borrar</button>
-            </td>
-        </tr>
+            <tr v-for="(hmed,key) in medicos" v-bind:key="hmed.horarios">
+                <td scope="row">{{hmed.id_medico}}</td>
+                <td scope="row">{{hmed.nombre}}</td>
+                <td scope="row">{{hmed.horarios.edad}}</td>
+                <td>{{hmed.dia}}</td>
+                <td>{{hmed.desde}}</td>
+                <td>{{hmed.hasta}}</td>
+                <td>
+                    <button @click="showModal=true" v-on:click="editHoraatencion(key)" type="button" class="btn btn-warning">Editar</button>
+                </td>
+                <td>
+                    <button v-on:click="deleteHoraatencion(hate.id_hatencion)" type="button" class="btn btn-danger">Borrar</button>
+                </td>
+            </tr>
         </tbody>
     </table>
 
 </div>
 
 <script>
-
     var app = new Vue({
 
         el: "#app",
-        data: function () {
+        data: function() {
             return {
                 msg: "Horarios de Atencion",
                 horarios: [], //horarios de atencion 
-                horaAtencion:{}, // carga horario de atencion 
+                horaAtencion: {}, // carga horario de atencion 
                 medicosHorarios: [], // horarios de atencion de medicos
                 medicoAtencion: {}, // carga horario de un medico
-                filter:{},
-                errors:{},
-                isNewRecord:true,
+                filter: {},
+                errors: {},
+                isNewRecord: true,
                 currentPage: 1,
-                pagination:{},
-                showModal:false,
-                dias:['Lunes','Martes','Miercoles','Jueves','Viernes'],
-                medicos:[], // listado de medicos
+                pagination: {},
+                showModal: false,
+                dias: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'],
+                medicos: [], // listado de medicos
                 horarioxmedico: [],
             }
         },
@@ -129,138 +127,137 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
             this.getHoraatencion();
             this.getMedicos();
         },
-        watch:{
-            currentPage: function(){
+        watch: {
+            currentPage: function() {
                 this.getHoraatencion();
             }
         },
+
         methods: {
-            normalizeErrors: function(errors){
+
+            valueSeleccion() {
+                this.seleccionado = this.$refs.seleccionado.value;
+            },
+            normalizeErrors: function(errors) {
                 var allErrors = {};
-                for(var i = 0 ; i < errors.length; i++){
+                for (var i = 0; i < errors.length; i++) {
                     allErrors[errors[i].field] = errors[i].message;
                 }
                 return allErrors;
             },
-            buscarxmedico: function(medicosHorarios){
-                for(let i=0 ; i < medicosHorarios.length; i++){
-                    if(medicosHorarios[i].medico_id === parseInt(medicoAtencion.medico_id)){
-                        console.log(medicosHorarios[i]);
-                        this.horarioxmedico = medicosHorarios[i];
-                    }
-                    return horarioxmedico;
-                }
-            },
-            getMedicos(){
+
+            getMedicos() {
                 var self = this;
                 axios.get('/apiv1/medicos')
-                    .then(function (response) {
+                    .then(function(response) {
                         // handle success
                         console.log(response.data);
                         self.medicos = response.data;
                     })
-                    .catch(function (error) {
+                    .catch(function(error) {
                         // handle error
                         console.log(error);
                     })
-                    .then(function () {
+                    .then(function() {
                         // always executed
                     });
             },
-            getMedicoatencion(){
+            getMedicoatencion() {
                 var self = this;
                 axios.get('/apiv1/medicoatencion')
-                    .then(function (response) {
+                    .then(function(response) {
                         // handle success
                         console.log(response.data);
                         self.medicosHorarios = response.data;
                     })
-                    .catch(function (error) {
+                    .catch(function(error) {
                         // handle error
                         console.log(error);
                     })
-                    .then(function () {
+                    .then(function() {
                         // always executed
                     });
             },
-            getHoraatencion: function(){
+            getHoraatencion: function() {
                 var self = this;
-                axios.get('/apiv1/horaatencion?page='+self.currentPage,{params:self.filter})
-                    .then(function (response) {
+                axios.get('/apiv1/horaatencion?page=' + self.currentPage, {
+                        params: self.filter
+                    })
+                    .then(function(response) {
                         console.log(response.data);
                         self.pagination.total = parseInt(response.headers['x-pagination-total-count']);
                         self.pagination.totalPages = parseInt(response.headers['x-pagination-page=count']);
                         self.pagination.perPage = parseInt(response.headers['x-pagination-per-page']);
                         self.horarios = response.data;
                     })
-                    .catch(function (error) {
+                    .catch(function(error) {
                         self.errors = self.normalizeErrors(error.response.data);
                     })
-                    .then(function () {
+                    .then(function() {
                         // always executed
                     });
             },
-            deleteHoraatencion: function(id){
+            deleteHoraatencion: function(id) {
                 var self = this;
-                axios.delete('/apiv1/horaatencions/'+ id)
-                    .then(function (response) {
-                        console.log("borra horarios id: "+ id);
+                axios.delete('/apiv1/horaatencions/' + id)
+                    .then(function(response) {
+                        console.log("borra horarios id: " + id);
                         console.log(response.data);
                         self.getHoraatencion();
                     })
-                    .catch(function (error) {
+                    .catch(function(error) {
                         // handle error
                         console.log(error);
                     })
-                    .then(function () {
+                    .then(function() {
                         // always executed
                     });
             },
-            editHoraatencion: function (key) {
-                this.horaAtencion = Object.assign({},this.horarios[key]);
+            editHoraatencion: function(key) {
+                this.horaAtencion = Object.assign({}, this.horarios[key]);
                 this.horaAtencion.key = key;
                 this.isNewRecord = false;
             },
-            addHoraatencion: function(){
+            addHoraatencion: function() {
                 var self = this;
-                axios.post('/apiv1/horaatencion',self.horaAtencion)
-                    .then(function (response) {
+                axios.post('/apiv1/horaatencions', self.horaAtencion)
+                    .then(function(response) {
                         // handle success
                         console.log(response.data);
                         self.getHoraatencion()
                         // self.posts.unshift(response.data);
                         self.horaAtencion = {};
                     })
-                    .catch(function (error) {
+                    .catch(function(error) {
                         // handle error
                         console.log(error.response.data);
                         self.errors = self.normalizeErrors(error.response.data);
                         console.log(self.errors);
 
                     })
-                    .then(function () {
+                    .then(function() {
                         // always executed
                     });
             },
-            updateHoraatencion: function (key) {
+            updateHoraatencion: function(key) {
                 var self = this;
                 const params = new URLSearchParams();
                 params.append('dia', self.horaAtencion.dia);
                 params.append('desde', self.horaAtencion.desde);
                 params.append('hasta', self.horaAtencion.hasta);
-                axios.patch('/apiv1/horaatencions/'+key,params)
-                    .then(function (response) {
+                axios.patch('/apiv1/horaatencions/' + key, params)
+                    .then(function(response) {
                         // handle success
                         console.log(response.data);
                         self.getHoraatencion();
                         self.horaAtencion = {};
                         self.isNewRecord = true;
                     })
-                    .catch(function (error) {
+                    .catch(function(error) {
                         // handle error
                         console.log(error);
                     })
-                    .then(function () {
+                    .then(function() {
                         // always executed
                     });
 
@@ -269,5 +266,4 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js",['p
         }
 
     })
-
 </script>

@@ -18,7 +18,7 @@ class MedicoSearch extends Medico
     {
         return [
             [['id_medico', 'telefono', 'celular', 'especialidad_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['nombre', 'apellido', 'direccion', 'fecha_nacimiento', 'sexo', 'tipo_doc', 'nro_doc', 'mail'], 'safe'],
+            [['nombre', 'apellido', 'direccion', 'fecha_nacimiento', 'sexo', 'tipo_doc', 'nro_doc'], 'safe'],
         ];
     }
 

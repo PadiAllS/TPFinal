@@ -4,12 +4,9 @@
 //$this->registerCssFile("https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css",['position'=>$this::POS_HEAD]);
 $this->registerCssFile("//unpkg.com/bootstrap/dist/css/bootstrap.min.css", ['position' => $this::POS_HEAD]);
 $this->registerCssFile("//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css", ['position' => $this::POS_HEAD]);
-
 $this->registerJsFile("https://cdn.jsdelivr.net/npm/vue/dist/vue.js", ['position' => $this::POS_HEAD]);
 $this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js", ['position' => $this::POS_HEAD]);
-
 $this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js", ['position' => $this::POS_HEAD]);
-
 $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['position' => $this::POS_HEAD]);
 $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' => $this::POS_HEAD]);
 
@@ -23,12 +20,8 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                     <b-icon icon="pencil-square" animation="throb" font-scale="1" class="rounded-circle  p-2" variant="light"></b-icon>
                 </h1>
             </b-col>
-
         </b-row>
-
     </b-container>
-
-
     <b-modal v-model="showModal" title="Sistema Obra-Social" :header-bg-variant="headerBgVariant" :header-text-variant="headerTextVariant" :body-bg-variant="bodyBgVariant" :body-text-variant="bodyTextVariant" :footer-bg-variant="footerBgVariant" :footer-text-variant="footerTextVariant" id="my-modal">
         <form action="">
             <div class="form-group">
@@ -61,13 +54,6 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                 <small id="bodyhelpId" class="text-muted"></small>
                 <span class="text-danger" v-if="errors.contacto">{{ errors.contacto }}</span>
             </div>
-            <div class="form-group">
-                <label for="reintegro">Reintegro</label>
-                <input v-model="obrasocial.reintegro" type="text" name="reintegro" id="reintegro" class="form-control" placeholder="Ingrese Valor de Reintegro" aria-describedby="helpId">
-                <small id="bodyhelpId" class="text-muted"></small>
-                <span class="text-danger" v-if="errors.reintegro">{{ errors.reintegro }}</span>
-            </div>
-
         </form>
         <template v-slot:modal-footer="{ok, cancel, hide}">
             <b-button v-if="isNewRecord" @click="addObrasocial()" variant="warning" size="lg">Nueva Obra-Social</b-button>
@@ -90,7 +76,6 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                 <th>Telefono</th>
                 <th>Celular</th>
                 <th>Contacto</th>
-                <th>Reintegro</th>
             </tr>
             <tr>
                 <td>
@@ -101,18 +86,6 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                 </td>
                 <td>
                     <input v-on:change="getObrasocial()" class="form-control" v-model="filter.direccion">
-                </td>
-                <td>
-                    <input v-on:change="getObrasocial()" class="form-control" v-model="filter.telefono">
-                </td>
-                <td>
-                    <input v-on:change="getObrasocial()" class="form-control" v-model="filter.celular">
-                </td>
-                <td>
-                    <input v-on:change="getObrasocial()" class="form-control" v-model="filter.contacto">
-                </td>
-                <td>
-                    <input v-on:change="getObrasocial()" class="form-control" v-model="filter.reintegro">
                 </td>
             </tr>
         </thead>
@@ -125,7 +98,6 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                 <td>{{obra.telefono}}</td>
                 <td>{{obra.celular}}</td>
                 <td>{{obra.contacto}}</td>
-                <td>{{obra.reintegro}}</td>
                 <td>
                     <button @click="showModal=true" v-on:click="editObrasocial(key)" type="button" class="btn btn-warning">Editar</button>
                 </td>
@@ -159,6 +131,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                 bodyBgVariant: 'info',
                 bodyTextVariant: 'dark',
                 footerBgVariant: 'dark',
+                footerTextVariant: 'dark',
             }
         },
         mounted() {
@@ -269,7 +242,6 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                 params.append('telefono', self.obrasocial.telefono);
                 params.append('celular', self.obrasocial.celular);
                 params.append('contacto', self.obrasocial.contacto);
-                params.append('reintegro', self.obrasocial.reintegro);
                 axios.patch('/apiv1/obrasocials/' + key, params)
                     .then(function(response) {
                         // handle success

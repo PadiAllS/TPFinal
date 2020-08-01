@@ -12,24 +12,22 @@ $this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue
 
 $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['position' => $this::POS_HEAD]);
 $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' => $this::POS_HEAD]);
-
 ?>
 
-<div id="app" class="container">
-    <b-container class="bv-example-row bg-success text-center text-light">
+<b-container fluid id="app" class="bg-info bv-example-row  text-center text-light">
+    <div class="mb-4 p-3 bg-dark">
         <b-row>
-            <b-col>
+            <b-col font-scale='1'>
                 <h1>{{msg}}
                     <b-icon icon="card-checklist" animation="throb" font-scale="1" class="rounded-circle  p-2" variant="light"></b-icon>
                 </h1>
             </b-col>
-
         </b-row>
-
-    </b-container>
+    </div>
+    <!-- </b-container> -->
 
     <!-- Button trigger modal -->
-    <b-modal v-model="showModal" id="my-modal">
+    <b-modal v-model="showModal" title="Especialidades" :header-bg-variant="headerBgVariant" :header-text-variant="headerTextVariant" :body-bg-variant="bodyBgVariant" :body-text-variant="bodyTextVariant" :footer-bg-variant="footerBgVariant" :footer-text-variant="footerTextVariant" id="my-modal">
         <form action="">
             <div class="form-group">
                 <label for="nombre">Nombre</label>
@@ -56,63 +54,59 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
     <p>
         <template>
             <div>
-                <b-container>
-                    <b-row class="justify-content-md-end">
-                        <button @click="showModal=true" type='button' class="btn btn-primary">Nuevo</button>
-                        <b-button :class="visible ? null : 'collapsed'" :aria-expanded="visible ? 'true' : 'false'" aria-controls="collapse-4" @click="visible = !visible">
-                            Ocultar Lista </b-button>
-                    </b-row>
-                </b-container>
-                <b-collapse id="collapse-4" v-model="visible" class="mt-2">
-                    <table class=" table">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Nombre</th>
-                                <th>Detalle</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td>
+                <b-table-simple stacked='md' class="table bordered" bordered :head-variant="headVariant" :table-variant="tableVariant">
+                    <b-thead head-variant="dark">
+                        <template>
+                            <b-tr>
+                                <b-th>Id</b-th>
+                                <b-th>Nombre</b-th>
+                                <b-th>Detalle</b-th>
+                                <b-th>Opciones</b-th>
+                            </b-tr>
+                        </template>
+                        <template>
+                            <b-tr>
+                                <b-td>
                                     <input v-on:change="getEspecialidades()" class="form-control" v-model="filter.id_especialidad">
-                                </td>
-                                <td>
+                                </b-td>
+                                <b-td>
                                     <input v-on:change="getEspecialidades()" class="form-control" v-model="filter.nombre">
-                                </td>
-                                <td>
+                                </b-td>
+                                <b-td>
                                     <input v-on:change="getEspecialidades()" class="form-control" v-model="filter.detalle">
-                                </td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr v-for="(espec,key) in especialidades" v-bind:key="espec.id_especialidad">
-                                <td scope="row">{{espec.id_especialidad}}</td>
-                                <td>{{espec.nombre}}</td>
-                                <td>{{espec.detalle}}</td>
-
-                                <td>
-                                    <button @click="showModal=true" v-on:click="editEspecialidad(key)" type="button" class="btn btn-warning">Editar</button>
-                                </td>
-                                <td>
+                                </b-td>
+                                <b-td>
+                                    <b-container>
+                                        <b-row class="justify-content-center">
+                                            <b-row>
+                                                <button @click="showModal=true" type='button' class="btn btn-primary">Nueva Especialidad</button>
+                                            </b-row>
+                                    </b-container>
+                                </b-td>
+                            </b-tr>
+                        </template>
+                    </b-thead>
+                    <template>
+                        <b-tbody table-variant="warning">
+                            <b-tr v-for="(espec,key) in especialidades" v-bind:key="espec.id_especialidad">
+                                <b-td scope="row">{{espec.id_especialidad}}</b-td>
+                                <b-td>{{espec.nombre}}</b-td>
+                                <b-td>{{espec.detalle}}</b-td>
+                                <b-td>
+                                    <button @click="showModal=true" v-on:click="editEspecialidad(key)" type="button" class="btn btn-success">Editar</button>
                                     <button v-on:click="deleteEspecialidad(espec.id_especialidad)" type="button" class="btn btn-danger">Borrar</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <b-pagination v-model="currentPage" :total-rows="paginationtotal" :per-page="paginationperPage" aria-controls="my-table"></b-pagination>
-
-                </b-collapse>
+                                </b-td>
+                            </b-tr>
+                        </b-tbody>
+                    </template>
+                    </b-table>
+                    <b-container class="m-3">
+                        <b-pagination v-model="currentPage" :total-rows="pagination.total" :per-page="pagination.perPage" aria-controls="my-table"></b-pagination>
+                    </b-container>
             </div>
         </template>
     </p>
-
-
-
-</div>
+</b-container>
 
 <script>
     var app = new Vue({
@@ -128,10 +122,17 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                 isNewRecord: true,
                 currentPage: 1,
                 pagination: {},
-                paginationperPage: 3,
-                currentPage: 1,
                 visible: true,
                 showModal: false,
+                headerBgVariant: 'dark',
+                headerTextVariant: 'warning',
+                bodyBgVariant: 'info',
+                bodyTextVariant: 'dark',
+                footerBgVariant: 'dark',
+                footerTextVariant: 'dark',
+                headVariant: 'dark',
+                borderer: true,
+                tableVariant: 'primary',
             }
         },
         mounted() {
@@ -160,7 +161,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                     .then(function(response) {
                         // handle success
                         console.log(response.data);
-                        console.log("traje todas las especialidades");
+                        console.log("Se obtuvo todas las especialidades");
                         self.pagination.total = parseInt(response.headers['x-pagination-total-count']);
                         self.pagination.totalPages = parseInt(response.headers['x-pagination-page=count']);
                         self.pagination.perPage = parseInt(response.headers['x-pagination-per-page']);

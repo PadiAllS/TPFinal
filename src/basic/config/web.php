@@ -6,6 +6,7 @@ $db = require __DIR__ . '/db.php';
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
+    'language' => 'es',
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -56,8 +57,8 @@ $config = [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
-                        'apiv1/usuario', 'apiv1/especialidad', 'apiv1/medico',
-                        'apiv1/patologia',  'apiv1/horarioatencion', 'apiv1/obrasocial', 'apiv1/paciente'
+                        'apiv1/usuario', 'apiv1/especialidad', 'apiv1/medico', 'apiv1/medicoatencion', 'apiv1/pacientepatologia',
+                        'apiv1/patologia',  'apiv1/horaatencion', 'apiv1/obrasocial', 'apiv1/paciente'
                     ],
                 ],
             ],

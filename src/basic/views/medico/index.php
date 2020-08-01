@@ -9,7 +9,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/vue/dist/vue.js", ['position
 $this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js", ['position' => $this::POS_HEAD]);
 
 $this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js", ['position' => $this::POS_HEAD]);
-$this->registerJsFile("hhttps://cdn.jsdelivr.net/npm/vue-bootstrap-datetimepicker@5", ['position' => $this::POS_HEAD]);
+$this->registerJsFile("https://cdn.jsdelivr.net/npm/vue-bootstrap-datetimepicker@5", ['position' => $this::POS_HEAD]);
 
 $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['position' => $this::POS_HEAD]);
 
@@ -340,7 +340,6 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
                 params.append('nombre', self.medico.nombre);
                 params.append('apellido', self.medico.apellido);
                 params.append('direccion', self.medico.direccion);
-                params.append('localidad', self.medico.localidad);
                 params.append('codpos', self.medico.codpos);
                 params.append('telefono', self.medico.telefono);
                 params.append('celular', self.medico.celular);
@@ -348,7 +347,6 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
                 params.append('sexo', self.medico.sexo);
                 params.append('tipo_doc', self.medico.tipo_doc);
                 params.append('nro_doc', self.medico.nro_doc);
-                params.append('mail', self.medico.mail);
                 params.append('matricula', self.medico.matricula);
                 params.append('especialidad', self.medico.especialidad_id);
                 axios.patch('/apiv1/medicos/' + key, params)

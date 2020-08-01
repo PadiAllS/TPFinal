@@ -9,7 +9,7 @@ class Paciente extends \app\models\Paciente
 
     public function fields()
     {
-        return ['id_paciente', 'nombre', 'apellido',  'direccion', 'nro_doc', 'telefono', 'celular', 'sexo', 'num_afil'];
+        return ['id_paciente', 'nombre', 'apellido',  'direccion', 'nro_doc', 'telefono', 'nro_doc', 'celular', 'sexo', 'num_afil'];
     }
 
     public function extraFields()

@@ -7,12 +7,17 @@ class Medico extends \app\models\Medico
 {
     public function fields()
     {
-        return ['id_medico', 'nombre', 'apellido','direccion','telefono','celular','fecha_nacimiento','sexo','tipo_doc','matricula','especialidad'];
+        return ['horarios',  'id_medico', 'nombre', 'apellido', 'direccion', 'telefono', 'celular', 'fecha_nacimiento', 'sexo', 'tipo_doc', 'matricula', 'especialidad'];
     }
-    
-    public function estraFields()
+
+    public function extraFields()
     {
         return ['especialidad_id'];
+    }
+
+    public function getHorarios()
+    {
+        return $this->hasMany(Horaatencion::class, ['id_hatencion' => 'hatencion_id'])->viaTable(Medicoatencion::tableName(), ['medico_id' => 'id_medico']);
     }
 
     public function getEspecialidad()

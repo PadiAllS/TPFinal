@@ -11,7 +11,6 @@ use Yii;
  * @property string $nombre
  * @property string $apellido
  * @property string $direccion
- * @property string $localidad
  * @property string|null $codpos
  * @property string|null $telefono
  * @property string $celular
@@ -19,7 +18,6 @@ use Yii;
  * @property string $sexo
  * @property string $tipo_doc
  * @property string $nro_doc
- * @property string $mail
  * @property string $matricula
  * @property int|null $especialidad_id
  * @property int|null $created_by
@@ -47,12 +45,11 @@ class Medico extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'apellido', 'direccion', 'localidad', 'celular', 'fecha_nacimiento', 'sexo', 'tipo_doc', 'nro_doc', 'mail', 'matricula'], 'required'],
+            [['nombre', 'apellido', 'direccion',  'celular', 'fecha_nacimiento', 'sexo', 'tipo_doc', 'nro_doc', 'matricula'], 'required'],
             [['fecha_nacimiento'], 'safe'],
             [['sexo', 'tipo_doc'], 'string'],
             [['especialidad_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['nombre', 'apellido', 'direccion', 'matricula'], 'string', 'max' => 250],
-            [['localidad', 'mail'], 'string', 'max' => 100],
             [['codpos'], 'string', 'max' => 20],
             [['telefono', 'celular'], 'string', 'max' => 30],
             [['nro_doc'], 'string', 'max' => 45],
@@ -70,7 +67,7 @@ class Medico extends \yii\db\ActiveRecord
             'nombre' => 'Nombre',
             'apellido' => 'Apellido',
             'direccion' => 'Direccion',
-            'localidad' => 'Localidad',
+            // 'localidad' => 'Localidad',
             'codpos' => 'Codpos',
             'telefono' => 'Telefono',
             'celular' => 'Celular',
@@ -78,7 +75,7 @@ class Medico extends \yii\db\ActiveRecord
             'sexo' => 'Sexo',
             'tipo_doc' => 'Tipo Doc',
             'nro_doc' => 'Nro Doc',
-            'mail' => 'Mail',
+            // 'mail' => 'Mail',
             'matricula' => 'Matricula',
             'especialidad_id' => 'Especialidad ID',
             'created_by' => 'Created By',

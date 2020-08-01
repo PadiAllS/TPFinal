@@ -10,7 +10,7 @@ class Obrasocial extends ModelsObraSocial
 
     public function fields()
     {
-        return ['id_obra_social', 'nombre', 'telefono', 'celular', 'contacto', 'reintegro'];
+        return ['id_obra_social', 'nombre', 'telefono', 'celular', 'contacto'];
     }
 
     public function extraFields()
