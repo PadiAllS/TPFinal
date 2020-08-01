@@ -24,14 +24,15 @@ Estructura de directorios
       runtime/            contiene archivos generados durante la ejecucion
       vendor/             contiene packetes dependientes
       views/              contiene las vistas de aplicacion Web
-      web/                contains the entry script and Web resources
 
 REQUERIMIENTOS
 ------------
 
--El requisito mínimo  de proyecto es que su servidor web sea compatible con [PHP](https://www.php.net/) 5.4.0.
--GIT(https://git-scm.com/)
--[docker](https://get.docker.com/) y [docker-composer](http://getcomposer.org/)
+*El requisito mínimo  de proyecto es que su servidor web sea compatible con [PHP](https://www.php.net/) 5.4.0.
+
+*GIT(https://git-scm.com/)
+
+*[docker](https://get.docker.com/) y [docker-composer](http://getcomposer.org/)
 
 Instalación
 ------------
