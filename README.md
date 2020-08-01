@@ -6,7 +6,9 @@
     <h1 align="center">Trabajo Práctico Final</h1>
     <br>
 </p>
-Descripción
+
+
+Descrición del proyecto:
 -------------------
 
 Aplicación Web para uso y gestión de información clinica.
