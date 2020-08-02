@@ -12,6 +12,7 @@ $this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue
 
 $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['position' => $this::POS_HEAD]);
 $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' => $this::POS_HEAD]);
+$this->registerJsFile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js", ['position' => $this::POS_HEAD]);
 
 ?>
 <b-container fluid id="app" class="bg-info bv-example-row  text-center text-light">
@@ -166,16 +167,13 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
         </form>
         <template v-slot:modal-footer="{ok, cancel, hide}">
             <b-button v-if="isNewRecord" @click="addPaciente()" variant="warning" size="lg">Crear Nuevo Paciente</b-button>
-            <!-- <button v-if="isNewRecord" @click="addPaciente()" type="button" size='lg' class="btn btn-dark m-3">Crear</button> -->
-            <!-- <button v-if="!isNewRecord" @click="isNewRecord = !isNewRecord" v-on:click="paciente={}" type="button" class="btn btn-success m-3">Nuevo</button> -->
             <b-button v-if="!isNewRecord" @click="updatePaciente(paciente.id_paciente)" variant="warning" size="lg">Actualizar Paciente</b-button>
-            <!-- <button v-if="!isNewRecord" @click="updatePaciente(paciente.id_paciente)" type="button" class="btn btn-primary m-3">Actualizar</button> -->
-
         </template>
     </b-modal>
     <p>
-        <template>
-            <div>
+        <div ref="content">
+            <template>
+
                 <b-table-simple stacked='md' class="table bordered" bordered :table-variant="tableVariant">
                     <b-thead :head-variant="headVariant">
                         <template>
@@ -210,6 +208,9 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                                                 <button @click="showModal=true" type='button' class="btn btn-primary">Nuevo Paciente</button>
                                             </b-row>
                                     </b-container>
+                                    <div class="mt-3">
+                                        <button @click="download" class="btn btn-warning">Descargar PDF</button>
+                                    </div>
                                 </b-td>
                             </b-tr>
                         </template>
@@ -226,14 +227,16 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                             <b-td>
                                 <button @click="showModal=true" v-on:click="editpaciente(key)" type="button" class="btn btn-success">Editar</button>
                                 <button v-on:click="deletePaciente(pac.id_paciente)" type="button" class="btn btn-danger">Borrar</button>
+
                             </b-td>
                         </b-tr>
-                        </tbody>
-                        </b-table>
-                        <b-container class="m-3">
-                            <b-pagination v-model="currentPage" :total-rows="pagination.total" :per-page="pagination.perPage" aria-controls="my-table"></b-pagination>
-                        </b-container>
-            </div>
+                    </b-tbody>
+                    </b-table>
+
+                    <b-container class="m-3">
+                        <b-pagination v-model="currentPage" :total-rows="pagination.total" :per-page="pagination.perPage" aria-controls="my-table"></b-pagination>
+                    </b-container>
+        </div>
         </template>
     </p>
 </b-container>
@@ -273,6 +276,15 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
         },
 
         methods: {
+            // este metodo esta en prueba
+            download() {
+                const doc = new jsPDF();
+                const contentHtml = this.$refs.content.innerHTML;
+                doc.fromHTML(contentHtml, 10, 5, {
+                    width: 100
+                });
+                doc.save("listapacientes.pdf");
+            },
             getReferences() {
                 var self = this;
                 axios.get('/apiv1/obrasocials')

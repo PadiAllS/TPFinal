@@ -15,14 +15,23 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
 
 ?>
 
-<div id="app" class="container">
-    <h1>{{msg}}</h1>
+<b-container fluid id="app" class="bg-info bv-example-row  text-center text-light">
+    <div class="mb-4 p-3 bg-dark">
+        <b-row>
+            <b-col>
+                <h1>{{msg}}
+                    <b-icon icon="person-check-fill" animation="throb" font-scale="1" class="rounded-circle  p-2" variant="light"></b-icon>
+                </h1>
+            </b-col>
+
+        </b-row>
+    </div>
     <!-- Button trigger modal -->
-    <b-modal v-model="showModal" id="my-modal">
+    <b-modal v-model="showModal" title="Medicos" :header-bg-variant="headerBgVariant" :header-text-variant="headerTextVariant" :body-bg-variant="bodyBgVariant" :body-text-variant="bodyTextVariant" :footer-bg-variant="footerBgVariant" :footer-text-variant="footerTextVariant" size="xl" id="my-modal">
 
         <form action="">
             <div class="row">
-                <div class="col md-6">
+                <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input v-model="medico.nombre" type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingreseo nombre" aria-describedby="helpId">
@@ -31,7 +40,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
                     </div>
                 </div>
 
-                <div class="col md-6">
+                <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label for="apellido">Apellido</label>
                         <input v-model="medico.apellido" type="text" name="apellido" id="apellido" class="form-control" placeholder="Ingrese apellido" aria-describedby="helpId">
@@ -70,7 +79,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
             </div>
 
             <div class="row">
-                <div class="col md-3">
+                <div class="col-6 col-md-3">
                     <div class="form-group">
                         <label for="fecha_nacimiento">Fecha Nac.</label>
                         <input v-model="medico.fecha_nacimiento" type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" placeholder="Ingrese fecha nacimiento" aria-describedby="helpId">
@@ -78,7 +87,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
                         <span class="text-danger" v-if="errors.fecha_nacimiento"> {{ errors.fecha_nacimiento }} </span>
                     </div>
                 </div>
-                <div class="col md-3">
+                <div class="col-6 col-md-3">
                     <div class="form-group">
                         <label for="sexo">Sexo</label>
                         <input v-model="medico.sexo" type="text" name="sexo" id="sexo" class="form-control" placeholder="Ingrese sexo" aria-describedby="helpId">
@@ -86,7 +95,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
                         <span class="text-danger" v-if="errors.sexo">{{ errors.sexo }}</span>
                     </div>
                 </div>
-                <div class="col md-2">
+                <div class="col-6 col-md-2">
                     <div class="form-group">
                         <label for="tipo_doc">Tipo Doc.</label>
                         <input v-model="medico.tipo_doc" type="text" name="tipo_doc" id="tipo_doc" class="form-control" placeholder="Ingrese tipo doc." aria-describedby="helpId">
@@ -94,7 +103,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
                         <span class="text-danger" v-if="errors.tipo_doc">{{ errors.tipo_doc }}</span>
                     </div>
                 </div>
-                <div class="col md-4">
+                <div class="col-6 col-md-4">
                     <div class="form-group">
                         <label for="nro_doc">Nro. Doc.</label>
                         <input v-model="medico.nro_doc" type="text" name="nro_doc" id="nro_doc" class="form-control" placeholder="Ingrese nro. doc." aria-describedby="helpId">
@@ -105,15 +114,15 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
             </div>
 
             <div class="row">
-                <div class="col md-6">
+                <div class="col-6 col-md-6">
                     <div class="form-group">
-                        <label for="telefono">telefono</label>
+                        <label for="telefono">Telefono</label>
                         <input v-model="medico.telefono" type="text" name="telefono" id="telefono" class="form-control" placeholder="Ingrese telefono fijo" aria-describedby="helpId">
                         <small id="bodyhelpId" class="text-muted"></small>
                         <span class="text-danger" v-if="errors.telefono">{{ errors.telefono }}</span>
                     </div>
                 </div>
-                <div class="col md-6">
+                <div class="ol-6 col-md-6">
                     <div class="form-group">
                         <label for="celular">Celular</label>
                         <input v-model="medico.celular" type="text" name="celular" id="celular" class="form-control" placeholder="Ingrese telefono mobil" aria-describedby="helpId">
@@ -124,7 +133,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
             </div>
 
             <div class="row">
-                <div class="col md-6">
+                <div class="ol-6 col-md-6">
                     <div class="form-group">
                         <label for="matricula">Matricula</label>
                         <input v-model="medico.matricula" type="text" name="matricula" id="matricula" class="form-control" placeholder="Ingrese su matricula" aria-describedby="helpId">
@@ -140,7 +149,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
                         <span class="text-danger" v-if="errors.mail">{{ errors.mail }}</span>
                     </div>
                 </div> -->
-                <div class="col md-6">
+                <div class="ol-6 col-md-6">
                     <div class="form-group">
                         <label for="especialidad">Especialidad</label>
                         <select class="form-control" v-model="medico.especialidad_id">
@@ -157,69 +166,67 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
         </form>
         <template v-slot:modal-footer="{ok, cancel, hide}">
             <div v-if="consultaMedico">
-                <button v-if="isNewRecord" @click="addMedico()" type="button" class="btn btn-primary m-3">Crear</button>
-                <button v-if="!isNewRecord" @click="isNewRecord = !isNewRecord" v-on:click="medico={}" type="button" class="btn btn-success m-3">Nuevo</button>
-                <button v-if="!isNewRecord" @click="updateMedico(medico.id_medico)" type="button" class="btn btn-primary m-3">Actualizar</button>
+                <b-button v-if="isNewRecord" @click="addMedico()" variant="warning" size="lg">Crear Nuevo Medico</b-button>
+                <b-button v-if="!isNewRecord" @click="updateMedico(medico.id_medico)" variant="warning" size="lg">Actualizar Medico</b-button>
             </div>
         </template>
     </b-modal>
 
-    <p>
-        <button @click="showModal=true" type="button" class="btn btn-primary">Nuevo</button>
+
+    <template>
+        <div>
+            <b-table-simple stacked='md' class="table bordered" bordered :table-variant="tableVariant">
+                <b-thead :head-variant="headVariant">
+                    <b-tr>
+                        <b-th>Id</b-th>
+                        <b-th>Nombre</b-th>
+                        <b-th>Apellido</b-th>
+                        <b-th>Especialidad</b-th>
+                        <b-th>Opciones</b-th>
+                    </b-tr>
+                    <b-tr>
+                        <b-td>
+                            <input v-on:change="getMedicos()" class="form-control" v-model="filter.id_medico">
+                        </b-td>
+                        <b-td>
+                            <input v-on:change="getMedicos()" class="form-control" v-model="filter.nombre">
+                        </b-td>
+                        <b-td>
+                            <input v-on:change="getMedicos()" class="form-control" v-model="filter.apellido">
+                        </b-td>
+                        <b-td></b-td>
+                        <b-td>
+                            <b-container>
+                                <b-row class="justify-content-center">
+                                    <b-row>
+                                        <button @click="showModal=true" type='button' class="btn btn-primary">Nuevo Medico</button>
+                                    </b-row>
+                            </b-container>
+                        </b-td>
+
+                    </b-tr>
+                </b-thead>
+
+                <b-tbody>
+                    <b-tr v-for="(medic,key) in medicos" v-bind:key="medic.id_medico">
+                        <b-td scope="row">{{medic.id_medico}}</b-td>
+                        <b-td>{{medic.nombre}}</b-td>
+                        <b-td>{{medic.apellido}}</b-td>
+                        <b-td>{{medic.especialidad.nombre}}</b-td>
+                        <b-td>
+                            <button @click="showModal=true" v-on:click="editMedico(key)" type="button" class="btn btn-success">Editar</button>
+                            <button v-on:click="deleteMedico(medic.id_medico)" type="button" class="btn btn-danger">Borrar</button>
+                        </b-td>
+                    </b-tr>
+                </b-tbody>
+                </b-table>
+                <b-container class="m-3">
+                    <b-pagination v-model="currentPage" :total-rows="pagination.total" :per-page="pagination.perPage" aria-controls="my-table"></b-pagination>
+                </b-container>
+        </div>
+    </template>
     </p>
-
-    <b-pagination v-model="currentPage" :total-rows="pagination.total" :per-page="pagination.perPage" aria-controls="my-table">
-    </b-pagination>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Especialidad</>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>
-                    <input v-on:change="getMedicos()" class="form-control" v-model="filter.id_medico">
-                </td>
-                <td>
-                    <input v-on:change="getMedicos()" class="form-control" v-model="filter.nombre">
-                </td>
-                <td>
-                    <input v-on:change="getMedicos()" class="form-control" v-model="filter.apellido">
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr v-for="(medic,key) in medicos" v-bind:key="medic.id_medico">
-                <td scope="row">{{medic.id_medico}}</td>
-                <td>{{medic.nombre}}</td>
-                <td>{{medic.apellido}}</td>
-                <td></td>
-
-                <td>
-                    <button @click="showModal=true" v-on:click="editMedico(key)" type="button" class="btn btn-success">Detalle</button>
-                </td>
-                <td>
-                    <button @click="showModal=true" v-on:click="editMedico(key)" type="button" class="btn btn-warning">Editar</button>
-                </td>
-                <td>
-                    <button v-on:click="deleteMedico(medic.id_medico)" type="button" class="btn btn-danger">Borrar</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-</div>
-
+</b-container>
 <script>
     var app = new Vue({
 
@@ -237,6 +244,15 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
                 options: [],
                 showModal: false,
                 consultaMedico: true,
+                headerBgVariant: 'dark',
+                headerTextVariant: 'warning',
+                bodyBgVariant: 'info',
+                bodyTextVariant: 'dark',
+                footerBgVariant: 'dark',
+                footerTextVariant: 'dark',
+                headVariant: 'dark',
+                borderer: true,
+                tableVariant: 'primary',
             }
         },
         mounted() {
@@ -293,21 +309,36 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
                     });
             },
             deleteMedico: function(id) {
-                var self = this;
-                axios.delete('/apiv1/medicos/' + id)
-                    .then(function(response) {
-                        // handle success
-                        console.log("borra medico id: " + id);
-                        console.log(response.data);
-                        self.getMedicos();
-                    })
-                    .catch(function(error) {
-                        // handle error
-                        console.log(error);
-                    })
-                    .then(function() {
-                        // always executed
-                    });
+                Swal.fire({
+                    title: 'Esta seguro que desea borrar el registro ' + id + '?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    showConfirmButton: true,
+                    confirmButtonText: 'Si borrar!',
+                    cancelButtonText: 'No, regresar.',
+                }).then((result) => {
+                    if (result.value) {
+                        var self = this;
+                        axios.delete('/apiv1/medicos/' + id)
+                            .then(function(response) {
+                                // handle success
+                                console.log("borra medico id: " + id);
+                                console.log(response.data);
+                                self.getMedicos();
+                            })
+                            .catch(function(error) {
+                                // handle error
+                                console.log(error);
+                            })
+                            .then(function() {
+                                // always executed
+                            });
+                        Swal.fire({
+                            title: 'Se ha borrado con exito',
+                            icon: 'success',
+                        })
+                    }
+                }, );
             },
             editMedico: function(key) {
                 this.medico = Object.assign({}, this.medicos[key]);
@@ -333,6 +364,12 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
                     .then(function() {
                         // always executed
                     });
+                Swal.fire({
+                    title: 'Se creo el registro correctamente',
+                    icon: 'success',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Aceptar',
+                })
             },
             updateMedico: function(key) {
                 var self = this;

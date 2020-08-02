@@ -42,11 +42,10 @@ use app\assets\AppAsset;
             'options' => ['class' => 'nav-pills navbar-nav navbar-right '],
             'items' => [
                 ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'About', 'url' => ['/site/about']],
                 ['label' => 'Especialidad', 'url' => ['/especialidad']],
+                ['label' => 'Medico', 'url' => ['/medico']],
                 ['label' => 'Paciente', 'url' => ['/paciente']],
                 ['label' => 'ObraSocial', 'url' => ['/obrasocial']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
                 Yii::$app->user->isGuest ? (['label' => 'Login', 'url' => ['/site/login']]) : ('<li>'
                     . Html::beginForm(['/site/logout'], 'post')
                     . Html::submitButton(

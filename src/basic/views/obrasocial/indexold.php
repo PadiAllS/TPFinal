@@ -1,123 +1,142 @@
 <?php
 /* @var $this yii\web\View */
-
-//$this->registerCssFile("https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css",['position'=>$this::POS_HEAD]);
+$this->registerCssFile("https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css", ['position' => $this::POS_HEAD]);
 $this->registerCssFile("//unpkg.com/bootstrap/dist/css/bootstrap.min.css", ['position' => $this::POS_HEAD]);
 $this->registerCssFile("//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css", ['position' => $this::POS_HEAD]);
+
 $this->registerJsFile("https://cdn.jsdelivr.net/npm/vue/dist/vue.js", ['position' => $this::POS_HEAD]);
 $this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js", ['position' => $this::POS_HEAD]);
+
 $this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js", ['position' => $this::POS_HEAD]);
+
 $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['position' => $this::POS_HEAD]);
 $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' => $this::POS_HEAD]);
-$this->registerJsFile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js", ['position' => $this::POS_HEAD]);
-
 ?>
 
-<div id="app" class="container">
-    <b-container class="mb-3 bv-example-row bg-success text-center text-light">
+<b-container fluid id="app" class="bg-info bv-example-row  text-center text-light">
+    <div class="mb-4 p-3 bg-dark">
         <b-row>
             <b-col>
                 <h1>{{msg}}
                     <b-icon icon="pencil-square" animation="throb" font-scale="1" class="rounded-circle  p-2" variant="light"></b-icon>
                 </h1>
             </b-col>
+
         </b-row>
-    </b-container>
-    <b-modal v-model="showModal" title="Sistema Obra-Social" :header-bg-variant="headerBgVariant" :header-text-variant="headerTextVariant" :body-bg-variant="bodyBgVariant" :body-text-variant="bodyTextVariant" :footer-bg-variant="footerBgVariant" :footer-text-variant="footerTextVariant" id="my-modal">
+    </div>
+
+    <b-modal v-model="showModal" title="Sistema de Pacientes" :header-bg-variant="headerBgVariant" :header-text-variant="headerTextVariant" :body-bg-variant="bodyBgVariant" :body-text-variant="bodyTextVariant" :footer-bg-variant="footerBgVariant" :footer-text-variant="footerTextVariant" size="xl" id="my-modal">
         <form action="">
             <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input v-model="obrasocial.nombre" type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingrese Nombre de la Obra-Social" aria-describedby="helpId">
-                <small id="titlehelpId" class="text-muted"></small>
-                <span class="text-danger" v-if="errors.nombre"> {{ errors.nombre }} </span>
+                <div class="row">
+                    <div>
+                        <label for="nombre">Nombre</label>
+                        <input v-model="obrasocial.nombre" type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingrese Nombre de la Obra-Social" aria-describedby="helpId">
+                        <small id="titlehelpId" class="text-muted"></small>
+                        <span class="text-danger" v-if="errors.nombre"> {{ errors.nombre }} </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion">Direccion</label>
+                        <input v-model="obrasocial.direccion" type="text" name="direccion" id="direccion" class="form-control" placeholder="Ingrese Direccion" aria-describedby="helpId">
+                        <small id="bodyhelpId" class="text-muted"></small>
+                        <span class="text-danger" v-if="errors.direccion">{{ errors.direccion }}</span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label for="direccion">Direccion</label>
-                <input v-model="obrasocial.direccion" type="text" name="direccion" id="direccion" class="form-control" placeholder="Ingrese Direccion" aria-describedby="helpId">
-                <small id="bodyhelpId" class="text-muted"></small>
-                <span class="text-danger" v-if="errors.direccion">{{ errors.direccion }}</span>
+                <div class="row">
+                    <div>
+                        <label for="telefono">Telefono</label>
+                        <input v-model="obrasocial.telefono" type="text" name="telefono" id="telefono" class="form-control" placeholder="Ingrese num de Tel" aria-describedby="helpId">
+                        <small id="bodyhelpId" class="text-muted"></small>
+                        <span class="text-danger" v-if="errors.detalle">{{ errors.telefono }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="celular">Celular</label>
+                        <input v-model="obrasocial.celular" type="text" name="celular" id="celular" class="form-control" placeholder="Ingrese num de Cel" aria-describedby="helpId">
+                        <small id="bodyhelpId" class="text-muted"></small>
+                        <span class="text-danger" v-if="errors.celular">{{ errors.celular }}</span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label for="telefono">Telefono</label>
-                <input v-model="obrasocial.telefono" type="text" name="telefono" id="telefono" class="form-control" placeholder="Ingrese num de Tel" aria-describedby="helpId">
-                <small id="bodyhelpId" class="text-muted"></small>
-                <span class="text-danger" v-if="errors.detalle">{{ errors.telefono }}</span>
-            </div>
-            <div class="form-group">
-                <label for="celular">Celular</label>
-                <input v-model="obrasocial.celular" type="text" name="celular" id="celular" class="form-control" placeholder="Ingrese num de Cel" aria-describedby="helpId">
-                <small id="bodyhelpId" class="text-muted"></small>
-                <span class="text-danger" v-if="errors.celular">{{ errors.celular }}</span>
-            </div>
-            <div class="form-group">
-                <label for="contacto">Contacto</label>
-                <input v-model="obrasocial.contacto" type="text" name="contacto" id="contacto" class="form-control" placeholder="Contacto" aria-describedby="helpId">
-                <small id="bodyhelpId" class="text-muted"></small>
-                <span class="text-danger" v-if="errors.contacto">{{ errors.contacto }}</span>
+                <div class="row">
+                    <div>
+                        <label for="contacto">Contacto</label>
+                        <input v-model="obrasocial.contacto" type="text" name="contacto" id="contacto" class="form-control" placeholder="Contacto" aria-describedby="helpId">
+                        <small id="bodyhelpId" class="text-muted"></small>
+                        <span class="text-danger" v-if="errors.contacto">{{ errors.contacto }}</span>
+                    </div>
+                </div>
             </div>
         </form>
         <template v-slot:modal-footer="{ok, cancel, hide}">
             <b-button v-if="isNewRecord" @click="addObrasocial()" variant="warning" size="lg">Nueva Obra-Social</b-button>
-            <b-button v-if="!isNewRecord" @click="updateObrasocial(obrasocial.id_obra_social)" variant="warning" size="lg">Actualizar ObraSocial</b-button>
-
+            <b-button v-if="!isNewRecord" @click="updateObrasocial(obrasocial.id_obra_social)" variant="warning" size="lg">Actualizar Obra-Social</b-button>
         </template>
     </b-modal>
-
-
     <p>
-        <b-button @click="showModal=true" block variant="primary">Nueva Obra-Social</button>
+        <template>
+            <div>
+                <b-table-simple stacked='md' class="table bordered" bordered :table-variant="tableVariant">
+                    <b-thead :head-variant="headVariant">
+                        <template>
+                            <b-tr>
+                                <b-th>Id</b-th>
+                                <b-th>Nombre</b-th>
+                                <b-th>Direccion</b-th>
+                                <b-th>Telefono</b-th>
+                                <b-th>Celular</b-th>
+                                <b-th>Contacto</b-th>
+                                <b-th>Opciones</b-th>
+                            </b-tr>
+                        </template>
+                        <template>
+                            <b-tr>
+                                <b-td>
+                                    <input v-on:change="getObrasocial()" class="form-control" v-model="filter.id_obra_social">
+                                </b-td>
+                                <b-td>
+                                    <input v-on:change="getObrasocial()" class="form-control" v-model="filter.nombre">
+                                </b-td>
+                                <b-td>
+                                    <input v-on:change="getObrasocial()" class="form-control" v-model="filter.direccion">
+                                </b-td>
+                                <b-td>
+                                    <b-container>
+                                        <b-row class="justify-content-center">
+                                            <b-row>
+                                                <button @click="showModal=true" type='button' class="btn btn-primary">Nueva Obra-Social</button>
+                                            </b-row>
+                                    </b-container>
+                                </b-td>
+                            </b-tr>
+                    </b-thead>
+
+                    <b-tbody>
+                        <b-tr v-for="(obra,key) in obrassocial" v-bind:key="obra.id_obra_social">
+                            <b-td scope="row">{{obra.id_obra_social}}</b-td>
+                            <b-td>{{obra.nombre}}</b-td>
+                            <b-td>{{obra.direccion}}</b-td>
+                            <b-td>{{obra.telefono}}</b-td>
+                            <b-td>{{obra.celular}}</b-td>
+                            <b-td>{{obra.contacto}}</b-td>
+                            <b-td>
+                                <button @click="showModal=true" v-on:click="editObrasocial(key)" type="button" class="btn btn-warning">Editar</button>
+                                <button v-on:click="deleteObrasocial(obra.id_obra_social)" type="button" class="btn btn-danger">Borrar</button>
+                            </b-td>
+                        </b-tr>
+                    </b-tbody>
+                    </b-table>
+                    <b-container class="m-3">
+                        <b-pagination v-model="currentPage" :total-rows="pagination.total" :per-page="pagination.perPage" aria-controls="my-table"></b-pagination>
+                    </b-container>
+            </div>
+        </template>
     </p>
-
-    <table ref="content" class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Direccion</th>
-                <th>Telefono</th>
-                <th>Celular</th>
-                <th>Contacto</th>
-            </tr>
-            <tr>
-                <td>
-                    <input v-on:change="getObrasocial()" class="form-control" v-model="filter.id_obra_social">
-                </td>
-                <td>
-                    <input v-on:change="getObrasocial()" class="form-control" v-model="filter.nombre">
-                </td>
-                <td>
-                    <input v-on:change="getObrasocial()" class="form-control" v-model="filter.direccion">
-                </td>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr v-for="(obra,key) in obrassocial" v-bind:key="obra.id_obra_social">
-                <td scope="row">{{obra.id_obra_social}}</td>
-                <td>{{obra.nombre}}</td>
-                <td>{{obra.direccion}}</td>
-                <td>{{obra.telefono}}</td>
-                <td>{{obra.celular}}</td>
-                <td>{{obra.contacto}}</td>
-                <td>
-                    <button @click="showModal=true" v-on:click="editObrasocial(key)" type="button" class="btn btn-warning">Editar</button>
-                </td>
-                <td>
-                    <button v-on:click="deleteObrasocial(obra.id_obra_social)" type="button" class="btn btn-danger">Borrar</button>
-                </td>
-                <td>
-                    <button @click="download">Descargar PDF</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <b-pagination v-model="currentPage" :total-rows="pagination.total" :per-page="pagination.perPage" aria-controls="my-table"></b-pagination>
-
-</div>
-
+</b-container>
 <script>
     var app = new Vue({
-
         el: "#app",
         data: function() {
             return {
@@ -136,6 +155,9 @@ $this->registerJsFile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.
                 bodyTextVariant: 'dark',
                 footerBgVariant: 'dark',
                 footerTextVariant: 'dark',
+                headVariant: 'dark',
+                borderer: true,
+                tableVariant: 'primary',
             }
         },
         mounted() {
@@ -143,14 +165,6 @@ $this->registerJsFile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.
         },
 
         methods: {
-            download() {
-                const doc = new jsPDF();
-                const contentHtml = this.$refs.content.innerHTML;
-                doc.fromHTML(contentHtml, 15, 15, {
-                    width: 150
-                });
-                doc.save("obrassociales.pdf");
-            },
             normalizeErrors: function(errors) {
                 var allErrors = {};
                 for (var i = 0; i < errors.length; i++) {
