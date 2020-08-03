@@ -6,6 +6,7 @@ $this->registerCssFile("//unpkg.com/bootstrap/dist/css/bootstrap.min.css", ['pos
 $this->registerCssFile("//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css", ['position' => $this::POS_HEAD]);
 
 $this->registerJsFile("https://cdn.jsdelivr.net/npm/vue/dist/vue.js", ['position' => $this::POS_HEAD]);
+$this->registerJsFile("https://unpkg.com/vue-router/dist/vue-router.js", ['position' => $this::POS_HEAD]);
 $this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js", ['position' => $this::POS_HEAD]);
 
 $this->registerJsFile("https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js", ['position' => $this::POS_HEAD]);
@@ -163,10 +164,14 @@ $this->registerJsFile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.
                         <span class="text-danger" v-if="errors.responsable_telef">{{ errors.responsable_telef }}</span>
                     </div>
                 </div>
+
             </div>
+
+
         </form>
         <template v-slot:modal-footer="{ok, cancel, hide}">
             <b-button v-if="isNewRecord" @click="addPaciente()" variant="warning" size="lg">Crear Nuevo Paciente</b-button>
+            <b-button v-if="!showButton" @click="router.Push({ name: 'yourroutename'})" variant="warning" size="lg">Posee Patologia</b-button>
             <b-button v-if="!isNewRecord" @click="updatePaciente(paciente.id_paciente)" variant="warning" size="lg">Actualizar Paciente</b-button>
         </template>
     </b-modal>
@@ -256,8 +261,19 @@ $this->registerJsFile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.
                 isNewRecord: true,
                 currentPage: 1,
                 pagination: {},
+                showButton: false,
                 docs: ['DNI', 'Carnet Extranjero', 'RUC', 'PASAPORTE', 'P.NAC', 'Otros'],
                 sexos: ['Masculino', 'Femenino', 'Bisexual', 'Transexual', 'Indefinido'],
+                selected: '',
+                // options: [{
+                //         text: 'Si',
+                //         value: 'true'
+                //     },
+                //     {
+                //         text: 'No',
+                //         value: 'false'
+                //     }
+                // ],
                 showModal: false,
                 headerBgVariant: 'dark',
                 headerTextVariant: 'warning',

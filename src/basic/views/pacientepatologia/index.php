@@ -22,26 +22,26 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
             </b-col>
         </b-row>
     </b-container>
-
+    <div class="form-group">
+        <label for="paciente">Elija el paciente</label>
+        <select ref="seleccionado" class="form-control" v-model="pacientep.paciente_id">
+            <option :value="pacientes.id_paciente" v-for="pac in pacientes">
+                {{pac.nombre}} {{pac.apellido}}
+            </option>
+        </select>
+        <small id="bodyhelpId" class="text-muted"></small>
+        <span></span>
+    </div>
     <b-modal v-model="showModal" title="Patologia Paciente" :header-bg-variant="headerBgVariant" :header-text-variant="headerTextVariant" :body-bg-variant="bodyBgVariant" :body-text-variant="bodyTextVariant" :footer-bg-variant="footerBgVariant" :footer-text-variant="footerTextVariant" id="my-modal">
         <form action="">
-            <div class="form-group">
-                <label for="Nombre">Nombre Paciente</label>
-                <input v-model="pacientep.paciente_id" value="" type="text" name="nombre" id="nombre" class="form-control" aria-describedby="helpId">
-                <!-- <small id="titlehelpId" class="text-muted"></small> -->
-                <!-- <span class="text-danger" v-if="errors.nombre"> {{ errors.nombre }} </span> -->
-            </div>
-            <div class="form-group">
+            <div class="form-group text-center">
                 <label for="patologia">Patologia</label>
-                <input v-model="pacientep.patologia_id" type="text" name="direccion" id="direccion" class="form-control" placeholder="Ingrese Patologia" aria-describedby="helpId">
-                <!-- <small id="bodyhelpId" class="text-muted"></small> -->
-                <!-- <span class="text-danger" v-if="errors.direccion">{{ errors.direccion }}</span> -->
-                <!-- </div> -->
-                <!-- <div class="form-group">
-                <label for="telefono">Descripcion</label>
-                <input v-model="obrasocial.telefono" type="text" name="telefono" id="telefono" class="form-control" placeholder="Ingrese num de Tel" aria-describedby="helpId">
-                <!-- <small id="bodyhelpId" class="text-muted"></small> -->
-                <!-- <span class="text-danger" v-if="errors.detalle">{{ errors.telefono }}</span> -->
+                <select class="form-control" v-model="pacientep.patologia_id">
+                    <option :value="pac.id_patologia" v-for="pac in patolog">
+                        {{pac.nombre}}
+                    </option>
+                </select>
+                <small id="bodyhelpId" class="text-muted"></small>
             </div>
         </form>
         <template v-slot:modal-footer="{ok, cancel, hide}">
@@ -88,7 +88,8 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                 msg: "Paciente-Patologias",
                 pacientes: [],
                 paciente: [],
-                patologias: [],
+                patolog: {},
+                patologias: {},
                 pacientep: {},
                 filter: {},
                 errors: {},
@@ -126,6 +127,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                     .then(function(response) {
                         console.log(response.data);
                         console.log("Datos Paciente");
+                        self.pacientes = response.data;
                     })
                     .catch(function(error) {
                         // handle error
@@ -147,7 +149,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                         self.pagination.total = parseInt(response.headers['x-pagination-total-count']);
                         self.pagination.totalPages = parseInt(response.headers['x-pagination-page=count']);
                         self.pagination.perPage = parseInt(response.headers['x-pagination-per-page']);
-                        self.pacientes = response.data;
+                        self.pacientep = response.data;
                     })
                     .catch(function(error) {
                         // handle error
@@ -166,6 +168,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                     .then(function(response) {
                         console.log(response.data);
                         console.log("Datos Patologia");
+                        self.patolog = respose.data;
                     })
                     .catch(function(error) {
                         // handle error
@@ -181,15 +184,15 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                 this.pacientep.key = key;
                 this.isNewRecord = false;
             },
-            addPacientePatologia: function() {
+            addPatologia: function() {
                 var self = this;
-                axios.post('/apiv1/pacientepatologias', self.pacientep)
+                axios.post('/apiv1/patologias', self.pacientep)
                     .then(function(response) {
                         // handle success
                         console.log(response.data);
                         self.getPacientePatologia()
                         // self.posts.unshift(response.data);
-                        self.pacientep = {};
+                        self.patolog = {};
                         self.showModal = false;
                     })
                     .catch(function(error) {
