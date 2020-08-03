@@ -46,6 +46,8 @@ use app\assets\AppAsset;
                 ['label' => 'Medico', 'url' => ['/medico']],
                 ['label' => 'Paciente', 'url' => ['/paciente']],
                 ['label' => 'ObraSocial', 'url' => ['/obrasocial']],
+                ['label' => 'Registro', 'url' => ['/usuario/create']],
+                
                 Yii::$app->user->isGuest ? (['label' => 'Login', 'url' => ['/site/login']]) : ('<li>'
                     . Html::beginForm(['/site/logout'], 'post')
                     . Html::submitButton(

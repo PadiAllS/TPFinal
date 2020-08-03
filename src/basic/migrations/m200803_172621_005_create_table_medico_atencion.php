@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m200717_085421_005_create_table_medico_atencion extends Migration
+class m200803_172621_005_create_table_medico_atencion extends Migration
 {
     public function up()
     {

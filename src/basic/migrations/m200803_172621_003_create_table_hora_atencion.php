@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m200717_085421_003_create_table_hora_atencion extends Migration
+class m200803_172621_003_create_table_hora_atencion extends Migration
 {
     public function up()
     {
