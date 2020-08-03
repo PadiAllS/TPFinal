@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m200618_182410_006_create_table_patologia extends Migration
+class m200803_172621_011_create_table_vademecum extends Migration
 {
     public function up()
     {
@@ -12,10 +12,10 @@ class m200618_182410_006_create_table_patologia extends Migration
         }
 
         $this->createTable(
-            '{{%patologia}}',
+            '{{%vademecum}}',
             [
-                'id_patologia' => $this->primaryKey(),
-                'nombre' => $this->string(240),
+                'id_vademecum' => $this->primaryKey(),
+                'medicamento' => $this->string(100)->notNull(),
                 'created_by' => $this->integer(),
                 'created_at' => $this->integer(),
                 'updated_by' => $this->integer(),
@@ -27,6 +27,6 @@ class m200618_182410_006_create_table_patologia extends Migration
 
     public function down()
     {
-        $this->dropTable('{{%patologia}}');
+        $this->dropTable('{{%vademecum}}');
     }
 }

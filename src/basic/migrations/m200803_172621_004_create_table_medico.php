@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m200618_182410_003_create_table_medico extends Migration
+class m200803_172621_004_create_table_medico extends Migration
 {
     public function up()
     {
@@ -15,17 +15,20 @@ class m200618_182410_003_create_table_medico extends Migration
             '{{%medico}}',
             [
                 'id_medico' => $this->primaryKey(),
-                'nombre' => $this->string(250),
-                'apellido' => $this->string(250),
-                'direccion' => $this->string(250),
-                'telefono' => $this->integer(),
-                'celular' => $this->integer(),
-                'fecha_nacimiento' => $this->dateTime(),
-                'sexo' => $this->string(),
-                'tipo_doc' => $this->string(),
-                'nro_doc' => $this->string(45),
-                'matricula' => $this->string(250),
-                'especialidad_id' => $this->integer(),
+                'nombre' => $this->string(100)->notNull(),
+                'apellido' => $this->string(100)->notNull(),
+                'direccion' => $this->string(100)->notNull(),
+                'localidad' => $this->string(100)->notNull(),
+                'codpos' => $this->string(20),
+                'telefono' => $this->string(30),
+                'celular' => $this->string(30)->notNull(),
+                'fecha_nacimiento' => $this->dateTime()->notNull(),
+                'sexo' => $this->string(20)->notNull(),
+                'tipo_doc' => $this->string(20)->notNull(),
+                'nro_doc' => $this->string(30)->notNull(),
+                'mail' => $this->string(100)->notNull(),
+                'matricula' => $this->string(100)->notNull(),
+                'especialidad_id' => $this->integer()->notNull(),
                 'created_by' => $this->integer(),
                 'created_at' => $this->integer(),
                 'updated_by' => $this->integer(),

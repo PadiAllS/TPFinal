@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m200717_085421_009_create_table_turnos extends Migration
+class m200803_172621_009_create_table_turnos extends Migration
 {
     public function up()
     {
@@ -18,9 +18,9 @@ class m200717_085421_009_create_table_turnos extends Migration
                 'nro_orden' => $this->integer()->notNull(),
                 'fecha_registro' => $this->dateTime(),
                 'fecha_consulta' => $this->dateTime(),
-                'paciente_id' => $this->integer(),
-                'medico_id' => $this->integer(),
-                'consulta_id' => $this->integer(),
+                'paciente_id' => $this->integer()->notNull(),
+                'medico_id' => $this->integer()->notNull(),
+                'consulta_id' => $this->integer()->notNull(),
                 'created_by' => $this->integer(),
                 'updated_by' => $this->integer(),
                 'created_at' => $this->integer(),

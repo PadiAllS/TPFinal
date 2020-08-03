@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m200618_182410_008_create_table_usuario extends Migration
+class m200803_172621_010_create_table_usuario extends Migration
 {
     public function up()
     {
@@ -17,6 +17,7 @@ class m200618_182410_008_create_table_usuario extends Migration
                 'id' => $this->primaryKey(),
                 'username' => $this->string(80)->notNull(),
                 'name' => $this->string(80)->notNull(),
+                'email' => $this->string(100)->notNull(),
                 'password' => $this->string(),
                 'authKey' => $this->string(),
                 'accessToken' => $this->string(),

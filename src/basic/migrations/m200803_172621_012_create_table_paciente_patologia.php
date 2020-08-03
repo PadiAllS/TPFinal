@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m200618_182410_010_create_table_paciente_patologia extends Migration
+class m200803_172621_012_create_table_paciente_patologia extends Migration
 {
     public function up()
     {
@@ -15,18 +15,18 @@ class m200618_182410_010_create_table_paciente_patologia extends Migration
             '{{%paciente_patologia}}',
             [
                 'id_paciente_patologia' => $this->primaryKey(),
-                'paciente_id' => $this->integer(),
-                'patologia_id' => $this->integer(),
+                'paciente_id' => $this->integer()->notNull(),
+                'patologia_id' => $this->integer()->notNull(),
                 'created_by' => $this->integer(),
                 'created_at' => $this->integer(),
                 'updated_by' => $this->integer(),
-                'updated_at' => $this->integer()->notNull(),
+                'updated_at' => $this->integer(),
             ],
             $tableOptions
         );
 
-        $this->createIndex('fk_paciente_patologia_1_idx', '{{%paciente_patologia}}', ['paciente_id']);
         $this->createIndex('fk_paciente_patologia_2_idx', '{{%paciente_patologia}}', ['patologia_id']);
+        $this->createIndex('fk_paciente_patologia_1_idx', '{{%paciente_patologia}}', ['paciente_id']);
 
         $this->addForeignKey(
             'fk_paciente_patologia_1',

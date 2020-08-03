@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m200717_085421_001_create_table_consulta extends Migration
+class m200803_172621_001_create_table_consulta extends Migration
 {
     public function up()
     {
@@ -15,11 +15,11 @@ class m200717_085421_001_create_table_consulta extends Migration
             '{{%consulta}}',
             [
                 'id_consulta' => $this->primaryKey(),
-                'motivo' => $this->string(250),
-                'diagnostico' => $this->string(45),
-                'fecha_consulta' => $this->date(),
+                'motivo' => $this->string(250)->notNull(),
+                'diagnostico' => $this->string(45)->notNull(),
+                'fecha_consulta' => $this->date()->notNull(),
                 'status' => $this->integer(),
-                'turno_id' => $this->integer(),
+                'turno_id' => $this->integer()->notNull(),
                 'tratamiento' => $this->text(),
                 'created_by' => $this->integer(),
                 'updated_by' => $this->integer(),
@@ -28,6 +28,8 @@ class m200717_085421_001_create_table_consulta extends Migration
             ],
             $tableOptions
         );
+
+        $this->createIndex('turno_id', '{{%consulta}}', ['id_consulta']);
     }
 
     public function down()

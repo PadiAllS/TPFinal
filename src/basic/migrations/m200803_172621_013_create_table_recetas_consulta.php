@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m200618_182410_011_create_table_recetas_consulta extends Migration
+class m200803_172621_013_create_table_recetas_consulta extends Migration
 {
     public function up()
     {
@@ -15,7 +15,7 @@ class m200618_182410_011_create_table_recetas_consulta extends Migration
             '{{%recetas_consulta}}',
             [
                 'consulta_id' => $this->primaryKey(),
-                'vademecum_id' => $this->integer(),
+                'vademecum_id' => $this->integer()->notNull(),
                 'created_by' => $this->integer(),
                 'created_at' => $this->integer(),
                 'updated_by' => $this->integer(),

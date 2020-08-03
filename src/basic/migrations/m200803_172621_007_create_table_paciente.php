@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m200717_085421_007_create_table_paciente extends Migration
+class m200803_172621_007_create_table_paciente extends Migration
 {
     public function up()
     {
@@ -15,18 +15,18 @@ class m200717_085421_007_create_table_paciente extends Migration
             '{{%paciente}}',
             [
                 'id_paciente' => $this->primaryKey(),
-                'nombre' => $this->string(250)->notNull(),
-                'apellido' => $this->string(250)->notNull(),
-                'direccion' => $this->string(250)->notNull(),
-                'telefono' => $this->integer()->notNull(),
-                'celular' => $this->integer()->notNull(),
-                'sexo' => $this->string(),
-                'tipo_doc' => $this->string()->notNull(),
-                'nro_doc' => $this->integer()->notNull(),
-                'nom_ape_mat' => $this->string(250),
-                'nom_ape_pat' => $this->string(250),
-                'obra_social_id' => $this->integer(),
-                'num_afil' => $this->string(200)->notNull(),
+                'nombre' => $this->string(100)->notNull(),
+                'apellido' => $this->string(100)->notNull(),
+                'direccion' => $this->string(100)->notNull(),
+                'telefono' => $this->string(30)->notNull(),
+                'celular' => $this->string(30)->notNull(),
+                'sexo' => $this->string(20),
+                'tipo_doc' => $this->string(20)->notNull(),
+                'nro_doc' => $this->string(30)->notNull(),
+                'nom_ape_mat' => $this->string(100)->notNull(),
+                'nom_ape_pat' => $this->string(100)->notNull(),
+                'obra_social_id' => $this->integer()->notNull(),
+                'num_afil' => $this->string(200),
                 'fecha_nacimiento' => $this->dateTime()->notNull(),
                 'responsable_nombre' => $this->string(100)->notNull(),
                 'resoponsable_telef' => $this->string(50)->notNull(),
