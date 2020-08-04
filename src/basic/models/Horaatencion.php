@@ -61,19 +61,10 @@ class Horaatencion extends \yii\db\ActiveRecord
     /**
      * Gets query for [[MedicoAtencions]].
      *
-     * @return \yii\db\ActiveQuery|MedicoAtencionQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getMedicoAtencions()
     {
         return $this->hasMany(MedicoAtencion::className(), ['hatencion_id' => 'id_hatencion']);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return HoraatencionQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new HoraatencionQuery(get_called_class());
     }
 }

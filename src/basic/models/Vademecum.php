@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "vademecum".
  *
  * @property int $id_vademecum
- * @property string|null $medicamento
+ * @property string $medicamento
  * @property int|null $created_by
  * @property int|null $created_at
  * @property int|null $updated_by
@@ -32,8 +32,9 @@ class Vademecum extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['medicamento'], 'required'],
             [['created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['medicamento'], 'string', 'max' => 250],
+            [['medicamento'], 'string', 'max' => 100],
         ];
     }
 
@@ -55,19 +56,10 @@ class Vademecum extends \yii\db\ActiveRecord
     /**
      * Gets query for [[RecetasConsultas]].
      *
-     * @return \yii\db\ActiveQuery|RecetasConsultaQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getRecetasConsultas()
     {
         return $this->hasMany(RecetasConsulta::className(), ['vademecum_id' => 'id_vademecum']);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return VademecumQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new VademecumQuery(get_called_class());
     }
 }

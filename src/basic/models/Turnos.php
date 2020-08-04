@@ -11,9 +11,9 @@ use Yii;
  * @property int $nro_orden
  * @property string|null $fecha_registro
  * @property string|null $fecha_consulta
- * @property int|null $paciente_id
- * @property int|null $medico_id
- * @property int|null $consulta_id
+ * @property int $paciente_id
+ * @property int $medico_id
+ * @property int $consulta_id
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property int|null $created_at
@@ -39,7 +39,7 @@ class Turnos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nro_orden'], 'required'],
+            [['nro_orden', 'paciente_id', 'medico_id', 'consulta_id'], 'required'],
             [['nro_orden', 'paciente_id', 'medico_id', 'consulta_id', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
             [['fecha_registro', 'fecha_consulta'], 'safe'],
             [['paciente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Paciente::className(), 'targetAttribute' => ['paciente_id' => 'id_paciente']],
@@ -71,7 +71,7 @@ class Turnos extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Paciente]].
      *
-     * @return \yii\db\ActiveQuery|PacienteQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getPaciente()
     {
@@ -81,7 +81,7 @@ class Turnos extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Medico]].
      *
-     * @return \yii\db\ActiveQuery|MedicoQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getMedico()
     {
@@ -91,19 +91,10 @@ class Turnos extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Consulta]].
      *
-     * @return \yii\db\ActiveQuery|ConsultaQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getConsulta()
     {
         return $this->hasOne(Consulta::className(), ['id_consulta' => 'consulta_id']);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return TurnosQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new TurnosQuery(get_called_class());
     }
 }

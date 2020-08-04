@@ -37,7 +37,7 @@ class Medicoatencion extends \yii\db\ActiveRecord
             [['medico_id', 'hatencion_id'], 'required'],
             [['medico_id', 'hatencion_id', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
             [['medico_id'], 'exist', 'skipOnError' => true, 'targetClass' => Medico::className(), 'targetAttribute' => ['medico_id' => 'id_medico']],
-            [['hatencion_id'], 'exist', 'skipOnError' => true, 'targetClass' => Horaatencion::className(), 'targetAttribute' => ['hatencion_id' => 'id_hatencion']],
+            [['hatencion_id'], 'exist', 'skipOnError' => true, 'targetClass' => HoraAtencion::className(), 'targetAttribute' => ['hatencion_id' => 'id_hatencion']],
         ];
     }
 
@@ -60,10 +60,8 @@ class Medicoatencion extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Medico]].
      *
-     * @return \yii\db\ActiveQuery|MedicoQuery
+     * @return \yii\db\ActiveQuery
      */
-
-
     public function getMedico()
     {
         return $this->hasOne(Medico::className(), ['id_medico' => 'medico_id']);
@@ -72,19 +70,10 @@ class Medicoatencion extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Hatencion]].
      *
-     * @return \yii\db\ActiveQuery|HoraatencionQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getHatencion()
     {
-        return $this->hasOne(Horaatencion::className(), ['id_hatencion' => 'hatencion_id']);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return MedicoatencionQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new MedicoatencionQuery(get_called_class());
+        return $this->hasOne(HoraAtencion::className(), ['id_hatencion' => 'hatencion_id']);
     }
 }

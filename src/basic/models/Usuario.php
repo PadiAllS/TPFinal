@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property string $username
  * @property string $name
+ * @property string $email
  * @property string|null $password
  * @property string|null $authKey
  * @property string|null $accessToken
@@ -30,8 +31,8 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'name'], 'required'],
-            [['username', 'name'], 'string', 'max' => 80],
+            [['username', 'name', 'email'], 'required'],
+            [['username', 'name', 'email'], 'string', 'max' => 80],
             [['password', 'authKey', 'accessToken'], 'string', 'max' => 255],
         ];
     }
@@ -45,6 +46,7 @@ class Usuario extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'id' => 'ID',
             'username' => 'Username',
             'name' => 'Name',
+            'email' => 'email',
             'password' => 'Password',
             'authKey' => 'Auth Key',
             'accessToken' => 'Access Token',

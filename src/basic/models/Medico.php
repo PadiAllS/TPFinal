@@ -11,6 +11,7 @@ use Yii;
  * @property string $nombre
  * @property string $apellido
  * @property string $direccion
+ * @property string $localidad
  * @property string|null $codpos
  * @property string|null $telefono
  * @property string $celular
@@ -18,8 +19,9 @@ use Yii;
  * @property string $sexo
  * @property string $tipo_doc
  * @property string $nro_doc
+ * @property string $mail
  * @property string $matricula
- * @property int|null $especialidad_id
+ * @property int $especialidad_id
  * @property int|null $created_by
  * @property int|null $created_at
  * @property int|null $updated_by
@@ -45,14 +47,12 @@ class Medico extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'apellido', 'direccion',  'celular', 'fecha_nacimiento', 'sexo', 'tipo_doc', 'nro_doc', 'matricula'], 'required'],
+            [['nombre', 'apellido', 'direccion', 'localidad', 'celular', 'fecha_nacimiento', 'sexo', 'tipo_doc', 'nro_doc', 'mail', 'matricula', 'especialidad_id'], 'required'],
             [['fecha_nacimiento'], 'safe'],
-            [['sexo', 'tipo_doc'], 'string'],
             [['especialidad_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['nombre', 'apellido', 'direccion', 'matricula'], 'string', 'max' => 250],
-            [['codpos'], 'string', 'max' => 20],
-            [['telefono', 'celular'], 'string', 'max' => 30],
-            [['nro_doc'], 'string', 'max' => 45],
+            [['nombre', 'apellido', 'direccion', 'localidad', 'mail', 'matricula'], 'string', 'max' => 100],
+            [['codpos', 'sexo', 'tipo_doc'], 'string', 'max' => 20],
+            [['telefono', 'celular', 'nro_doc'], 'string', 'max' => 30],
             [['especialidad_id'], 'exist', 'skipOnError' => true, 'targetClass' => Especialidad::className(), 'targetAttribute' => ['especialidad_id' => 'id_especialidad']],
         ];
     }
@@ -67,7 +67,7 @@ class Medico extends \yii\db\ActiveRecord
             'nombre' => 'Nombre',
             'apellido' => 'Apellido',
             'direccion' => 'Direccion',
-            // 'localidad' => 'Localidad',
+            'localidad' => 'Localidad',
             'codpos' => 'Codpos',
             'telefono' => 'Telefono',
             'celular' => 'Celular',
@@ -75,7 +75,7 @@ class Medico extends \yii\db\ActiveRecord
             'sexo' => 'Sexo',
             'tipo_doc' => 'Tipo Doc',
             'nro_doc' => 'Nro Doc',
-            // 'mail' => 'Mail',
+            'mail' => 'Mail',
             'matricula' => 'Matricula',
             'especialidad_id' => 'Especialidad ID',
             'created_by' => 'Created By',
@@ -88,7 +88,7 @@ class Medico extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Especialidad]].
      *
-     * @return \yii\db\ActiveQuery|EspecialidadQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getEspecialidad()
     {
@@ -98,7 +98,7 @@ class Medico extends \yii\db\ActiveRecord
     /**
      * Gets query for [[MedicoAtencions]].
      *
-     * @return \yii\db\ActiveQuery|MedicoAtencionQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getMedicoAtencions()
     {
@@ -108,19 +108,10 @@ class Medico extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Turnos]].
      *
-     * @return \yii\db\ActiveQuery|TurnosQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getTurnos()
     {
         return $this->hasMany(Turnos::className(), ['medico_id' => 'id_medico']);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return MedicoQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new MedicoQuery(get_called_class());
     }
 }

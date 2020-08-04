@@ -8,11 +8,11 @@ use Yii;
  * This is the model class for table "consulta".
  *
  * @property int $id_consulta
- * @property string|null $motivo
- * @property string|null $diagnostico
- * @property string|null $fecha_consulta
+ * @property string $motivo
+ * @property string $diagnostico
+ * @property string $fecha_consulta
  * @property int|null $status
- * @property int|null $turno_id
+ * @property int $turno_id
  * @property string|null $tratamiento
  * @property int|null $created_by
  * @property int|null $updated_by
@@ -38,6 +38,7 @@ class Consulta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['motivo', 'diagnostico', 'fecha_consulta', 'turno_id'], 'required'],
             [['fecha_consulta'], 'safe'],
             [['status', 'turno_id', 'created_by', 'updated_by', 'created_at', 'updated_at'], 'integer'],
             [['tratamiento'], 'string'],
@@ -69,7 +70,7 @@ class Consulta extends \yii\db\ActiveRecord
     /**
      * Gets query for [[RecetasConsulta]].
      *
-     * @return \yii\db\ActiveQuery|RecetasConsultaQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getRecetasConsulta()
     {
@@ -79,19 +80,10 @@ class Consulta extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Turnos]].
      *
-     * @return \yii\db\ActiveQuery|TurnosQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getTurnos()
     {
         return $this->hasMany(Turnos::className(), ['consulta_id' => 'id_consulta']);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return ConsultaQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new ConsultaQuery(get_called_class());
     }
 }
