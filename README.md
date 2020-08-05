@@ -30,7 +30,7 @@ REQUERIMIENTOS
 
 *El requisito mínimo  de proyecto es que su servidor web sea compatible con [PHP](https://www.php.net/) 5.4.0.
 
-*GIT(https://git-scm.com/)
+*[GIT](https://git-scm.com/)
 
 *[docker](https://get.docker.com/) y [docker-composer](http://getcomposer.org/)
 
