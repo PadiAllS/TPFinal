@@ -25,9 +25,13 @@ class m200803_172621_010_create_table_usuario extends Migration
                 'updated_by' => $this->integer()->notNull(),
                 'created_at' => $this->integer()->notNull(),
                 'created_by' => $this->integer()->notNull(),
-            ],
-            $tableOptions
-        );
+            ]);
+                        //Usuario por defecto maxi / maxi
+            $this->insert('{{%usuario}}', [
+                'username' => 'admin',
+                'auth_key' => '0e07255b3578e3be24a464975922c4da',
+                'password_hash' => '$2y$10$quduV0UOp7x9DSmIRL6At.Mu/7Yk.KCbqqMEK5IbGnRUHtM8xNIm6'
+            ]);
     }
 
     public function down()
