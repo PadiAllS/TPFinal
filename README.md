@@ -92,4 +92,4 @@ Ejecutar por consola **first-start.sh** encontrado en la carpeta /bin.
  ``` 
  Acceder al sitio desde la url : **localhost:8000** - PhpMyAdmin : **localhost:8001**
  
- Usuario Prueba : **admin** pass: **admin**
+ Usuario Prueba : **admin** pass: **123456**
