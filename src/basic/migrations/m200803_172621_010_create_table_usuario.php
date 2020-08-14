@@ -20,6 +20,8 @@ class m200803_172621_010_create_table_usuario extends Migration
                 'email' => $this->string(100)->notNull(),
                 'password' => $this->string(),
                 'authKey' => $this->string(),
+                'activate' => $this->string(),
+                'verification_code' => $this->string(),
                 'accessToken' => $this->string(),
                 'updated_at' => $this->integer()->notNull(),
                 'updated_by' => $this->integer()->notNull(),
