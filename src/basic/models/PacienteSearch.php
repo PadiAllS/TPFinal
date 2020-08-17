@@ -72,9 +72,8 @@ class PacienteSearch extends Paciente
 
         $query->andFilterWhere(['like', 'nombre', $this->nombre])
             ->andFilterWhere(['like', 'apellido', $this->apellido])
-            ->andFilterWhere(['like', 'nro_doc', $this->nro_doc])
-            ->andFilterWhere(['like', 'num_afil', $this->num_afil]);
-
+            ->andFilterWhere(['like', 'num_afil', $this->num_afil])
+            ->andFilterWhere(['like', 'nro_doc', $this->nro_doc]);
 
         return $dataProvider;
     }

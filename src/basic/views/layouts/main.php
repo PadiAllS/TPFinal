@@ -47,7 +47,7 @@ use app\assets\AppAsset;
                 ['label' => 'Paciente', 'url' => ['/paciente']],
                 ['label' => 'ObraSocial', 'url' => ['/obrasocial']],
                 ['label' => 'Registro', 'url' => ['/usuario/create']],
-                
+
                 Yii::$app->user->isGuest ? (['label' => 'Login', 'url' => ['/site/login']]) : ('<li>'
                     . Html::beginForm(['/site/logout'], 'post')
                     . Html::submitButton(
@@ -71,7 +71,7 @@ use app\assets\AppAsset;
     </div>
 
     <footer class="footer">
-        <div class="container">
+        <div class="container text-center">
             <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
             <p class="pull-right"><?= Yii::powered() ?></p>

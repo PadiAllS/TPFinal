@@ -197,10 +197,10 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
                         <b-td></b-td>
                         <b-td>
                             <b-container>
-                                <b-row class="justify-content-center">
-                                    <b-row>
-                                        <button @click="showModal=true" type='button' class="btn btn-primary">Nuevo Medico</button>
-                                    </b-row>
+
+                                <b-row class="justify-content-md-center">
+                                    <button @click="showModal=true" type='button' class="btn btn-primary">Nuevo Medico</button>
+                                </b-row>
                             </b-container>
                         </b-td>
 

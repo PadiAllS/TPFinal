@@ -127,68 +127,48 @@ $this->registerJsFile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.
                             <span class="text-danger" v-if="errors.detalle">{{ errors.telefono }}
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            <div class="form-group">
+                                <label for="sexo">Nombre y Apellido Materno</label>
+                                <input v-model="paciente.nom_ape_mat" type="text" name="nom_mat" id="nom_mat" class="form-control" placeholder="Nombre y Apellido Materno" aria-describedby="helpId">
+                                <small id="bodyhelpId" class="text-muted"></small>
+                                <span class="text-danger" v-if="errors.nom_ape_mat">{{ errors.nom_ape_mat }}</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="form-group">
+                                <label for="sexo">Nombre y Apellido Paterno</label>
+                                <input v-model="paciente.nom_ape_pat" type="text" name="nom_pat" id="nom_pat" class="form-control" placeholder="Nombre y Apellido Paterno" aria-describedby="helpId">
+                                <small id="bodyhelpId" class="text-muted"></small>
+                                <span class="text-danger" v-if="errors.nom_ape_pat">{{ errors.nom_ape_pat }}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <div class="form-group">
+                                <label for="sexo">Nombre del responsable</label>
+                                <input v-model="paciente.responsable_nombre" type="text" name="responsable_nombre" id="responsable_nombre" class="form-control" placeholder="Ingrese su nombre" aria-describedby="helpId">
+                                <small id="bodyhelpId" class="text-muted"></small>
+                                <span class="text-danger" v-if="errors.responsable_nombre">{{ errors.responsable_nombre }}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <div class="form-group">
+                                <label for="sexo">Tel- Responsable</label>
+                                <input v-model="paciente.responsable_telef" type="text" name="responsable_telef" id="responsable_telef" class="form-control" placeholder="Ingrese su Tel" aria-describedby="helpId">
+                                <small id="bodyhelpId" class="text-muted"></small>
+                                <span class="text-danger" v-if="errors.responsable_telef">{{ errors.responsable_telef }}</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="row">
-                    <div class="col-12 col-md-3">
-                        <div class="form-group">
-                            <label for="sexo">Nombre y Apellido Materno</label>
-                            <input v-model="paciente.nom_ape_mat" type="text" name="nom_mat" id="nom_mat" class="form-control" placeholder="Nombre y Apellido Materno" aria-describedby="helpId">
-                            <small id="bodyhelpId" class="text-muted"></small>
-                            <span class="text-danger" v-if="errors.nom_ape_mat">{{ errors.nom_ape_mat }}</span>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-group">
-                            <label for="sexo">Nombre y Apellido Paterno</label>
-                            <input v-model="paciente.nom_ape_pat" type="text" name="nom_pat" id="nom_pat" class="form-control" placeholder="Nombre y Apellido Paterno" aria-describedby="helpId">
-                            <small id="bodyhelpId" class="text-muted"></small>
-                            <span class="text-danger" v-if="errors.nom_ape_pat">{{ errors.nom_ape_pat }}</span>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-md-3">
-                        <div class="form-group">
-                            <label for="sexo">Nombre del responsable</label>
-                            <input v-model="paciente.responsable_nombre" type="text" name="responsable_nombre" id="responsable_nombre" class="form-control" placeholder="Ingrese su nombre" aria-describedby="helpId">
-                            <small id="bodyhelpId" class="text-muted"></small>
-                            <span class="text-danger" v-if="errors.responsable_nombre">{{ errors.responsable_nombre }}</span>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-md-3">
-                        <div class="form-group">
-                            <label for="sexo">Tel- Responsable</label>
-                            <input v-model="paciente.responsable_telef" type="text" name="responsable_telef" id="responsable_telef" class="form-control" placeholder="Ingrese su Tel" aria-describedby="helpId">
-                            <small id="bodyhelpId" class="text-muted"></small>
-                            <span class="text-danger" v-if="errors.responsable_telef">{{ errors.responsable_telef }}</span>
-                        </div>
-                    </div>
-                </div>
-                <b-container>
-                    <b-row class="justify-content-center">
-                        <div>
-                            <label for="patologias">Patologias</label>
-                            <select id="patologias" class="form-control" v-model="pacientes.patologia" multiple>
-                                <template v-for="pat in patologia">
-                                    <option :value="pat.id_patologia">{{pat.nombre}}</option>
-                                </template>
-                            </select>
-                        </div>
-                    </b-row>
-                </b-container>
-
-                <!-- <div class="row justify-content-center">
-                        <div class="form-group">
-                            <label for="patologias">Patologias</label>
-                            <select id="patologias" class="form-control" v-model="patologia" multiple>
-                                <template v-for="pat in patologia">
-                                    <option :value="pat.id_patologia">{{pat.nombre}}</option>
-                                </template>
-                            </select>
-                        </div>
-                    </div> -->
-
             </div>
+
+
         </form>
         <template v-slot:modal-footer="{ok, cancel, hide}">
             <b-container>
@@ -202,50 +182,30 @@ $this->registerJsFile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.
             <b-button v-if="!isNewRecord" @click="updatePaciente(paciente.id_paciente)" variant="warning" size="lg">Actualizar Paciente</b-button>
         </template>
     </b-modal>
-    <b-modal v-model="showModalP" title="Patologia" :header-bg-variant="headerBgVariant" :header-text-variant="headerTextVariant" :body-bg-variant="bodyBgVariant" :body-text-variant="bodyTextVariant" :footer-bg-variant="footerBgVariant" :footer-text-variant="footerTextVariant" id="my-modalp">
+    <b-modal v-model="showModalP" title="Patologia" :header-bg-variant="headerBgVariant" :header-text-variant="headerTextVariant" :body-bg-variant="bodyBgVariant" :body-text-variant="bodyTextVariant" :footer-bg-variant="footerBgVariant" :footer-text-variant="footerTextVariant" size="xl" id="my-modalp">
         <form action="">
-
             <div class="form-group">
-                <b-container>
-                    <b-row class="justify-content-center">
-                        <div class="form-group">
-                            <label for="patologias">Patologias</label>
-                            <select id="patologias" class="form-control" v-model="pacientes.patologia" multiple>
-                                <template v-for="pat in patologia">
-                                    <option :value="pat.id_patologia">{{pat.nombre}}</option>
-                                </template>
-                            </select>
-                        </div>
-                    </b-row>
-                </b-container>
-
-            </div>
-            <!-- <select class="form-control" v-model="paciente.patologia">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <label for="patologia">Selecciona la Patologia</label>
+                        <select class="form-control" v-model="pacientes.id_paciente">
                             <option :value="pac.id_patologia" v-for="pac in patologia">
                                 {{pac.nombre}}
                             </option>
-                        </select> -->
-
-
-        </form>
-        <template v-slot:modal-footer="{ok, cancel, hide}">
-            <b-container>
-                <b-row class="justify-content-center">
-                    <div>
-                        <b-button v-if="isNewRecord" @click="addPaciente()" variant="warning" size="lg">Crear Nuevo Paciente</b-button>
+                        </select>
                     </div>
-                </b-row>
-            </b-container>
-        </template>
+                </div>
+            </div>
+        </form>
     </b-modal>
     <p>
         <div ref="content">
             <template>
-
                 <b-table-simple stacked='md' class="table bordered" bordered :table-variant="tableVariant">
                     <b-thead :head-variant="headVariant">
                         <template>
                             <b-tr>
+                                <b-th>Id</b-th>
                                 <b-th>Nombre y Apellido</b-th>
                                 <b-th>Numero de Afiliado</b-th>
                                 <b-th>Num Dni</b-th>
@@ -257,40 +217,45 @@ $this->registerJsFile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.
                         <template>
                             <b-tr>
                                 <b-td>
+                                    <input v-on:change="getPaciente()" class="form-control" v-model="filter.id_paciente">
+                                </b-td>
+                                <b-td>
                                     <input v-on:change="getPaciente()" class="form-control" v-model="filter.nombre">
                                 </b-td>
                                 <b-td>
                                     <input v-on:change="getPaciente()" class="form-control" v-model="filter.num_afil">
                                 </b-td>
-                                <b-td>
-                                    <input v-on:change="getPaciente()" class="form-control" v-model="filter.nro_doc">
-                                </b-td>
-                                </b-td>
+                                <b-td></b-td>
                                 <b-td></b-td>
                                 <b-td></b-td>
                                 <b-td>
                                     <b-container>
-                                        <b-row class="justify-content-center">
-
+                                        <b-row class="justify-content-md-center">
                                             <button @click="showModal=true" type='button' class="btn btn-primary">Nuevo Paciente</button>
-                                            <button @click="download" class="btn btn-warning">Descargar PDF</button>
-
                                         </b-row>
                                     </b-container>
-
+                                    <div class="mt-3">
+                                        <button @click="download" class="btn btn-warning">Descargar PDF</button>
+                                    </div>
+                                    <b-container>
+                                        <b-row>
+                                            <b-button @click="showModalP=true" v-if="addPaciente()" variant="warning" class="mr-3 pl-4" size="lg">Cargar-Patologia</b-button>
+                                        </b-row>
+                                    </b-container>
                                 </b-td>
                             </b-tr>
                         </template>
                     </b-thead>
 
                     <b-tbody>
-                        <b-tr v-for="(pac,key) in pacientes" v-bind:key="pacientes.id_paciente">
+                        <b-tr v-for="(pac,key) in pacientes" v-bind:key="pac.id_paciente">
+                            <b-td scope="row"> {{pac.id_paciente}}</b-td>
                             <b-td>{{pac.nombre}} {{pac.apellido}}</b-td>
                             <b-td>{{pac.num_afil}}</b-td>
                             <b-td>{{pac.nro_doc}}</b-td>
                             <b-td>{{pac.telefono}}</b-td>
                             <b-td>{{pac.celular}}</b-td>
-                            <b-td class="">
+                            <b-td>
                                 <button @click="showModal=true" v-on:click="editpaciente(key)" type="button" class="btn btn-success">Editar</button>
                                 <button v-on:click="deletePaciente(pac.id_paciente)" type="button" class="btn btn-danger">Borrar</button>
 
@@ -316,9 +281,7 @@ $this->registerJsFile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.
             return {
                 msg: "Pacientes",
                 pacientes: [],
-                paciente: {
-                    patologia: []
-                },
+                paciente: {},
                 references: [],
                 patologia: [],
                 filter: {},
@@ -346,7 +309,6 @@ $this->registerJsFile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.
         mounted() {
             this.getPaciente();
             this.getReferences();
-            this.getPatologias();
         },
 
         methods: {
@@ -375,7 +337,7 @@ $this->registerJsFile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.
             },
             getPatologias() {
                 var self = this;
-                axios.get('/apiv1/patologia')
+                axios.get('/apiv1/patologias')
                     .then(function(response) {
 
                         console.log(response.data);
@@ -426,12 +388,6 @@ $this->registerJsFile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.
                     showConfirmButton: true,
                     confirmButtonText: 'Si borrar!',
                     cancelButtonText: 'No, regresar.',
-                    // https://reygif.com/media/doctor-con-gafas-72182.gif
-                    backdrop: `
-                            rgba(126, 163, 236, 0.6)
-                            left center
-                           no-repeat
-                                    `
                 }).then((result) => {
                     if (result.value) {
                         var self = this;
@@ -491,23 +447,6 @@ $this->registerJsFile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.
                     showConfirmButton: true,
                     confirmButtonText: 'Aceptar',
                 })
-                // .then((result) => {
-                //     if (result.value) {
-                //         Swal.fire({
-                //                 title: 'Quiere agregar alguna patologia?',
-                //                 icon: 'info',
-                //                 showConfirmButton: true,
-                //                 showCancelButton: true,
-                //                 confirmButtonText: 'Si',
-                //                 cancelButtonText: 'No',
-                //             })
-                //             .then((result) => {
-                //                 if (result.value) {
-                //                     this.showModalP = true;
-                //                 }
-                //             })
-                //     }
-                // })
             },
             updatePaciente: function(key) {
                 var self = this;
@@ -546,8 +485,7 @@ $this->registerJsFile("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.
 
             }
 
-        },
-
+        }
 
     })
 </script>

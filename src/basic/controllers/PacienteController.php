@@ -38,10 +38,11 @@ class PacienteController extends Controller
     {
         $searchModel = new PacienteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        // $model = new Paciente();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            // 'model' => $model,
         ]);
     }
 

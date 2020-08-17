@@ -66,7 +66,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
         </thead>
 
         <tbody>
-            <tr v-for="(pps,key) in pacienteps" v-bind:key="pps.id_paciente_patologia">
+            <tr v-for="(pps,key) in pacientep" v-bind:key="pps.id_paciente_patologia">
                 <td scope="row">{{pps.id_paciente_patologia.paciente.nombre}}</td>
                 <td>{{pps.nombre}}</td>
                 <td>{{obra.direccion}}</td>

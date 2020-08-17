@@ -77,10 +77,11 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                                 </b-td>
                                 <b-td>
                                     <b-container>
-                                        <b-row class="justify-content-center">
-                                            <b-row>
+                                        <b-row class="justify-content-md-center">
+                                            <b-row class="justify-content-md-center">
                                                 <button @click="showModal=true" type='button' class="btn btn-primary">Nueva Especialidad</button>
                                             </b-row>
+                                        </b-row>
                                     </b-container>
                                 </b-td>
                             </b-tr>

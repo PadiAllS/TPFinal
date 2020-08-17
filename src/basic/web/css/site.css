@@ -23,9 +23,19 @@ body {
 
 .jumbotron {
     text-align: center;
-    background-color: transparent;
+    background: url() ;
 }
-
+.portada{
+    background: url(https://static.websguru.com.ar/var/m_9/9f/9f6/1921/23257-sanatorio-medico-quirurgico-sa-banner.jpg) no-repeat fixed center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+    width: 100% ;
+    text-align: center;
+  
+ }
 .jumbotron .btn {
     font-size: 21px;
     padding: 14px 24px;
