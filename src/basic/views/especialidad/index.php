@@ -62,7 +62,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/sweetalert2@9", ['position' 
                                 <b-th>Nombre</b-th>
                                 <b-th>Detalle</b-th>
                                 <b-th>Opciones</b-th>
-                            </b-tr>
+                            </b-tr><div id="app">
                         </template>
                         <template>
                             <b-tr>

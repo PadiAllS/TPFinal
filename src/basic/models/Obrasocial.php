@@ -3,17 +3,16 @@
 namespace app\models;
 
 use Yii;
-use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "obra_social".
  *
  * @property int $id_obra_social
- * @property string|null $nombre
- * @property string|null $direccion
- * @property int|null $telefono
- * @property int|null $celular
- * @property string|null $contacto
+ * @property string $nombre
+ * @property string $direccion
+ * @property string $telefono
+ * @property string $celular
+ * @property string $contacto
  * @property int|null $created_by
  * @property int|null $created_at
  * @property int|null $updated_by
@@ -37,8 +36,10 @@ class Obrasocial extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['telefono', 'celular', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['nombre', 'direccion', 'contacto'], 'string', 'max' => 250],
+            [['nombre', 'direccion', 'telefono', 'celular', 'contacto'], 'required'],
+            [['created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
+            [['nombre', 'direccion', 'contacto'], 'string', 'max' => 100],
+            [['telefono', 'celular'], 'string', 'max' => 30],
         ];
     }
 
@@ -48,7 +49,7 @@ class Obrasocial extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            // 'id_obra_social' => 'Id Obra Social',
+            'id_obra_social' => 'Id Obra Social',
             'nombre' => 'Nombre',
             'direccion' => 'Direccion',
             'telefono' => 'Telefono',
@@ -64,19 +65,10 @@ class Obrasocial extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Pacientes]].
      *
-     * @return \yii\db\ActiveQuery|PacienteQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getPacientes()
     {
         return $this->hasMany(Paciente::className(), ['obra_social_id' => 'id_obra_social']);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return ObrasocialQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new ObrasocialQuery(get_called_class());
     }
 }

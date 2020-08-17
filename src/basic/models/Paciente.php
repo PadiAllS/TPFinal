@@ -14,15 +14,15 @@ use Yii;
  * @property string $telefono
  * @property string $celular
  * @property string|null $sexo
- * @property string|null $tipo_doc
- * @property string|null $nro_doc
- * @property string|null $nom_ape_mat
- * @property string|null $nom_ape_pat
- * @property int|null $obra_social_id
- * @property string $num_afil
+ * @property string $tipo_doc
+ * @property string $nro_doc
+ * @property string $nom_ape_mat
+ * @property string $nom_ape_pat
+ * @property int $obra_social_id
+ * @property string|null $num_afil
  * @property string $fecha_nacimiento
  * @property string $responsable_nombre
- * @property string $responsable_telef
+ * @property string $resoponsable_telef
  * @property int|null $created_by
  * @property int|null $created_at
  * @property int|null $updated_by
@@ -48,14 +48,14 @@ class Paciente extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'apellido', 'direccion', 'telefono', 'celular', 'num_afil', 'fecha_nacimiento', 'responsable_nombre', 'responsable_telef'], 'required'],
+            [['nombre', 'apellido', 'direccion', 'telefono', 'celular', 'tipo_doc', 'nro_doc', 'nom_ape_mat', 'nom_ape_pat', 'obra_social_id', 'fecha_nacimiento', 'responsable_nombre', 'resoponsable_telef'], 'required'],
             [['obra_social_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['fecha_nacimiento'], 'safe'],
-            [['nombre', 'apellido', 'direccion', 'telefono', 'celular', 'tipo_doc', 'nro_doc', 'nom_ape_mat', 'nom_ape_pat'], 'string', 'max' => 250],
-            [['sexo'], 'string', 'max' => 255],
+            [['nombre', 'apellido', 'direccion', 'nom_ape_mat', 'nom_ape_pat', 'responsable_nombre'], 'string', 'max' => 100],
+            [['telefono', 'celular', 'nro_doc'], 'string', 'max' => 30],
+            [['sexo', 'tipo_doc'], 'string', 'max' => 20],
             [['num_afil'], 'string', 'max' => 200],
-            [['responsable_nombre'], 'string', 'max' => 100],
-            [['responsable_telef'], 'string', 'max' => 50],
+            [['resoponsable_telef'], 'string', 'max' => 50],
             [['obra_social_id'], 'exist', 'skipOnError' => true, 'targetClass' => ObraSocial::className(), 'targetAttribute' => ['obra_social_id' => 'id_obra_social']],
         ];
     }
@@ -81,7 +81,7 @@ class Paciente extends \yii\db\ActiveRecord
             'num_afil' => 'Num Afil',
             'fecha_nacimiento' => 'Fecha Nacimiento',
             'responsable_nombre' => 'Responsable Nombre',
-            'responsable_telef' => 'Responsable Telef',
+            'resoponsable_telef' => 'Resoponsable Telef',
             'created_by' => 'Created By',
             'created_at' => 'Created At',
             'updated_by' => 'Updated By',

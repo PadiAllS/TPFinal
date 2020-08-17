@@ -39,7 +39,7 @@ use app\assets\AppAsset;
             ],
         ]);
         echo Nav::widget([
-            'options' => ['class' => 'nav-pills navbar-nav navbar-right '],
+            'options' => ['class' => 'nav-pills navbar-nav ml-auto'],
             'items' => [
                 ['label' => 'Home', 'url' => ['/site/index']],
                 ['label' => 'Especialidad', 'url' => ['/especialidad']],
@@ -47,6 +47,23 @@ use app\assets\AppAsset;
                 ['label' => 'Paciente', 'url' => ['/paciente']],
                 ['label' => 'ObraSocial', 'url' => ['/obrasocial']],
                 ['label' => 'Registro', 'url' => ['/usuario/create']],
+                [
+                    "label" => "Administracion",
+                    "items" => [
+                        ['label' => 'Especialidad', 'url' => ['/especialidad']],
+                        ['label' => 'Medico', 'url' => ['/medico']],
+                    ],
+                    "options" => ["class" => "navbar-nav"],
+                ],
+                [
+                    "label" => "Pacientes",
+                    "items" => [
+                        ['label' => 'Paciente', 'url' => ['/paciente']],
+                        ['label' => 'ObraSocial', 'url' => ['/obrasocial']],
+                    ],
+                    "options" => ["class" => "navbar-nav"],
+                ],
+                ['label' => 'Registro', 'url' => ['/site/registro']],
 
                 Yii::$app->user->isGuest ? (['label' => 'Login', 'url' => ['/site/login']]) : ('<li>'
                     . Html::beginForm(['/site/logout'], 'post')

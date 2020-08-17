@@ -14,4 +14,13 @@ class Usuario extends \app\models\Usuario
     {
         return [''];
     }
+
+    public function login($password) {
+        if (\Yii::$app->getSecurity()->validatePassword($password, $this->password_hash)) {
+            
+            return true;
+        }
+        
+        return false;
+    }
 }

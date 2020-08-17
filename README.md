@@ -30,7 +30,7 @@ REQUERIMIENTOS
 
 *El requisito mínimo  de proyecto es que su servidor web sea compatible con [PHP](https://www.php.net/) 5.4.0.
 
-*GIT(https://git-scm.com/)
+*[GIT](https://git-scm.com/)
 
 *[docker](https://get.docker.com/) y [docker-composer](http://getcomposer.org/)
 
@@ -92,4 +92,4 @@ Ejecutar por consola **first-start.sh** encontrado en la carpeta /bin.
  ``` 
  Acceder al sitio desde la url : **localhost:8000** - PhpMyAdmin : **localhost:8001**
  
- Usuario Prueba : **admin** pass: **admin**
+ Usuario Prueba : **admin** pass: **123456**

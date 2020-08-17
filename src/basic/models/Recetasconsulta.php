@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "recetas_consulta".
  *
  * @property int $consulta_id
- * @property int|null $vademecum_id
+ * @property int $vademecum_id
  * @property int|null $created_by
  * @property int|null $created_at
  * @property int|null $updated_by
@@ -33,7 +33,7 @@ class Recetasconsulta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['consulta_id'], 'required'],
+            [['consulta_id', 'vademecum_id'], 'required'],
             [['consulta_id', 'vademecum_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['consulta_id'], 'unique'],
             [['consulta_id'], 'exist', 'skipOnError' => true, 'targetClass' => Consulta::className(), 'targetAttribute' => ['consulta_id' => 'id_consulta']],
@@ -59,7 +59,7 @@ class Recetasconsulta extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Consulta]].
      *
-     * @return \yii\db\ActiveQuery|ConsultaQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getConsulta()
     {
@@ -69,19 +69,10 @@ class Recetasconsulta extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Vademecum]].
      *
-     * @return \yii\db\ActiveQuery|VademecumQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getVademecum()
     {
         return $this->hasOne(Vademecum::className(), ['id_vademecum' => 'vademecum_id']);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return RecetasconsultaQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new RecetasconsultaQuery(get_called_class());
     }
 }

@@ -8,12 +8,12 @@ use Yii;
  * This is the model class for table "paciente_patologia".
  *
  * @property int $id_paciente_patologia
- * @property int|null $paciente_id
- * @property int|null $patologia_id
+ * @property int $paciente_id
+ * @property int $patologia_id
  * @property int|null $created_by
  * @property int|null $created_at
  * @property int|null $updated_by
- * @property int $updated_at
+ * @property int|null $updated_at
  *
  * @property Paciente $paciente
  * @property Patologia $patologia
@@ -34,8 +34,8 @@ class Pacientepatologia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['paciente_id', 'patologia_id'], 'required'],
             [['paciente_id', 'patologia_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['updated_at'], 'required'],
             [['paciente_id'], 'exist', 'skipOnError' => true, 'targetClass' => Paciente::className(), 'targetAttribute' => ['paciente_id' => 'id_paciente']],
             [['patologia_id'], 'exist', 'skipOnError' => true, 'targetClass' => Patologia::className(), 'targetAttribute' => ['patologia_id' => 'id_patologia']],
         ];
@@ -60,7 +60,7 @@ class Pacientepatologia extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Paciente]].
      *
-     * @return \yii\db\ActiveQuery|PacienteQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getPaciente()
     {
@@ -70,19 +70,10 @@ class Pacientepatologia extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Patologia]].
      *
-     * @return \yii\db\ActiveQuery|PatologiaQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getPatologia()
     {
         return $this->hasOne(Patologia::className(), ['id_patologia' => 'patologia_id']);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return PacientepatologiaQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new PacientepatologiaQuery(get_called_class());
     }
 }

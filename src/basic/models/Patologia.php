@@ -35,8 +35,7 @@ class Patologia extends \yii\db\ActiveRecord
         return [
             [['nombre', 'detalle'], 'required'],
             [['created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['nombre'], 'string', 'max' => 240],
-            [['detalle'], 'string', 'max' => 100],
+            [['nombre', 'detalle'], 'string', 'max' => 100],
         ];
     }
 
@@ -59,19 +58,10 @@ class Patologia extends \yii\db\ActiveRecord
     /**
      * Gets query for [[PacientePatologias]].
      *
-     * @return \yii\db\ActiveQuery|PacientePatologiaQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getPacientePatologias()
     {
         return $this->hasMany(PacientePatologia::className(), ['patologia_id' => 'id_patologia']);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @return PatologiaQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new PatologiaQuery(get_called_class());
     }
 }
