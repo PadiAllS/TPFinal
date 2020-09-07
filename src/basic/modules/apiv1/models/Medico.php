@@ -2,12 +2,16 @@
 
 namespace app\modules\apiv1\models;
 
+use app\models\Horaatencion;
+use app\models\Medicoatencion;
+use yii\data\ActiveDataProvider;
+
 
 class Medico extends \app\models\Medico
 {
     public function fields()
     {
-        return ['horarios',  'id_medico', 'nombre', 'apellido', 'direccion', 'telefono', 'celular', 'fecha_nacimiento', 'sexo', 'tipo_doc', 'matricula', 'especialidad'];
+        return ['id_medico', 'nombre', 'apellido', 'direccion', 'telefono', 'celular', 'fecha_nacimiento', 'sexo', 'tipo_doc', 'matricula', 'especialidad','horarios'];
     }
 
     public function extraFields()

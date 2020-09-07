@@ -42,11 +42,6 @@ use app\assets\AppAsset;
             'options' => ['class' => 'nav-pills navbar-nav ml-auto'],
             'items' => [
                 ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'Especialidad', 'url' => ['/especialidad']],
-                ['label' => 'Medico', 'url' => ['/medico']],
-                ['label' => 'Paciente', 'url' => ['/paciente']],
-                ['label' => 'ObraSocial', 'url' => ['/obrasocial']],
-                ['label' => 'Registro', 'url' => ['/usuario/create']],
                 [
                     "label" => "Administracion",
                     "items" => [

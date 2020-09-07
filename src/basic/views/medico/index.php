@@ -293,7 +293,7 @@ $this->registerJsFile("https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", ['
                     .then(function(response) {
                         // handle success
                         console.log(response.data);
-                        console.log("traje todas los medicos");
+                        console.log("Se obtuvo todas las medicos");
                         self.pagination.total = parseInt(response.headers['x-pagination-total-count']);
                         self.pagination.totalPages = parseInt(response.headers['x-pagination-page=count']);
                         self.pagination.perPage = parseInt(response.headers['x-pagination-per-page']);
